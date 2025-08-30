@@ -1,4 +1,4 @@
-<!-- navbar-top.html -->
+<!-- navbar-top.php -->
 <nav class="navbar navbar-top fixed-top navbar-expand" id="navbarDefault">
   <div class="collapse navbar-collapse justify-content-between">
     <!-- Logo -->
@@ -7,7 +7,7 @@
               type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse">
         <span class="navbar-toggle-icon"><span class="toggle-line"></span></span>
       </button>
-      <a class="navbar-brand me-1 me-sm-3" href="index.html">
+      <a class="navbar-brand me-1 me-sm-3" href="index.php">
         <div class="d-flex align-items-center">
           <img src="assets/img/icons/logo.png" alt="phoenix" width="27" />
           <h5 class="logo-text ms-2 d-none d-sm-block">Admin Dashboard</h5>
