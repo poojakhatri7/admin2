@@ -9,8 +9,9 @@
       </button>
       <a class="navbar-brand me-1 me-sm-3" href="index.php">
         <div class="d-flex align-items-center">
-          <img src="assets/img/icons/tvs_logo.png" alt="phoenix" width="75" />
-          <h5 class="logo-text ms-2 d-none d-sm-block">Welcome Admin</h5>
+          <img src="assets/img/icons/tvs_logo.png" alt="phoenix" width="75" style="margin-left:60px;">
+<h5 class="logo-text d-none d-sm-block" style="padding-left:100px;">Welcome Admin</h5>
+
         </div>
       </a>
     </div>

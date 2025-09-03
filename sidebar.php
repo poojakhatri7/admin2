@@ -19,6 +19,10 @@
   white-space: normal;  /* allow wrapping */
   word-wrap: break-word;
   line-height: 1.3;   /* little space after icon */
+
+}
+.nav-item-wrapper {
+  margin-bottom: 15px; /* adjust as you like */
 }
 
 </style>
@@ -62,25 +66,25 @@
   <div class="collapse" id="nv-enquiry" data-bs-parent="#navbarVerticalNav">
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link" href="admin_enquiry_message.php">
+        <a class="nav-link" href="admin_enquiry_message">
           <span data-feather="list"></span>
           <span class="submenu-text">All Enquiry</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="complete-enquiry.php">
+        <a class="nav-link" href="complete_enquiry">
           <span data-feather="check-circle"></span>
           <span class="submenu-text">Complete Enquiry</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="pending-enquiry.php">
+        <a class="nav-link" href="pending_enquiry">
           <span data-feather="clock"></span>
           <span class="submenu-text">Pending Enquiry</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="rejected-enquiry.php">
+        <a class="nav-link" href="rejected_enquiry">
           <span data-feather="x-circle"></span>
           <span class="submenu-text">Rejected Enquiry</span>
         </a>
@@ -144,7 +148,7 @@
 
   <!-- Total Customers -->
   <div class="nav-item-wrapper">
-    <a class="nav-link dropdown-indicator label-1" href="#nv-customers" role="button">
+    <a class="nav-link dropdown-indicator label-1" href="customer" role="button">
       <div class="d-flex align-items-center">
         <div class="dropdown-indicator-icon-wrapper"></div>
         <span class="nav-link-icon">
