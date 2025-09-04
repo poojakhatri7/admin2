@@ -13,7 +13,7 @@
   margin-right: 6px; /* little space between icon & text */
 }
 .submenu-text {
-  font-size: 15px;   /* bigger submenu */
+  font-size: 14px;   /* bigger submenu */
   font-weight: 600;
   margin-left: 1px;
   white-space: normal;  /* allow wrapping */
@@ -35,7 +35,7 @@
 
   <!-- Dashboard -->
   <div class="nav-item-wrapper">
-    <a class="nav-link dropdown-indicator label-1" href="#nv-dashboard" role="button">
+    <a class="nav-link dropdown-indicator label-1" href="index" role="button">
       <div class="d-flex align-items-center">
         <div class="dropdown-indicator-icon-wrapper"></div>
         <span class="nav-link-icon">

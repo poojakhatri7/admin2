@@ -3,13 +3,15 @@
 <?php include 'sidebar.php'; ?>
 <?php include 'top_navbar.php'; ?>
 <div class="content">
-        <nav class="mb-3" aria-label="breadcrumb">
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="#!">Page 1</a></li>
-            <li class="breadcrumb-item"><a href="#!">Page 2</a></li>
-            <li class="breadcrumb-item active">Default</li>
-          </ol>
-        </nav>
+          <?php
+          $id = $_GET ['id'];
+// Query users
+$sql = "SELECT * FROM users  where id = $id ORDER BY id DESC  ";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+?>
         <div class="mb-9">
           <div class="row align-items-center justify-content-between g-3 mb-4">
             <div class="col-auto">
@@ -30,15 +32,16 @@
                     <div class="card-body d-flex flex-column justify-content-between pb-3">
                       <div class="row align-items-center g-5 mb-3 text-center text-sm-start">
                         <div class="col-12 col-sm-auto mb-sm-2">
-                          <div class="avatar avatar-5xl"><img class="rounded-circle" src="../../../assets/img/team/15.webp" alt="" /></div>
+                          <div class="avatar avatar-5xl"><img class="rounded-circle" src="assets/img/team/avatar.webp" alt="" /></div>
                         </div>
                         <div class="col-12 col-sm-auto flex-1">
-                          <h3>Ansolo Lazinatov</h3>
+                          <h3><?php echo $row['name']; ?></h3>
                           <p class="text-body-secondary">Joined 3 months ago</p>
                           <div><a class="me-2" href="#!"><span class="fab fa-linkedin-in text-body-quaternary text-opacity-75 text-primary-hover"></span></a><a class="me-2" href="#!"><span class="fab fa-facebook text-body-quaternary text-opacity-75 text-primary-hover"></span></a><a href="#!"><span class="fab fa-twitter text-body-quaternary text-opacity-75 text-primary-hover"></span></a></div>
                         </div>
                       </div>
-                      <div class="d-flex flex-between-center border-top border-dashed pt-4">
+
+                      <!-- <div class="d-flex flex-between-center border-top border-dashed pt-4">
                         <div>
                           <h6>Following</h6>
                           <p class="fs-7 text-body-secondary mb-0">297</p>
@@ -51,7 +54,7 @@
                           <h6>Completion</h6>
                           <p class="fs-7 text-body-secondary mb-0">97</p>
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -59,50 +62,55 @@
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex align-items-center mb-3">
-                        <h3 class="me-1">Default Address</h3><button class="btn btn-link p-0"><span class="fas fa-pen fs-8 ms-3 text-body-quaternary"></span></button>
+                        <h3 class="me-1">Customer Address</h3><button class="btn btn-link p-0"><span class="fas fa-pen fs-8 ms-3 text-body-quaternary"></span></button>
                       </div>
                       <h5 class="text-body-secondary">Address</h5>
-                      <p class="text-body-secondary">Shatinon Mekalan<br />Vancouver, British Columbia<br />Canada</p>
+                      <p class="text-body-secondary"><?php echo $row['address']; ?><br /><?php echo $row['city']; ?><br /><?php echo $row['State']; ?></p>
                       <div class="mb-3">
-                        <h5 class="text-body-secondary">Email</h5><a href="mailto:shatinon@jeemail.com">shatinon@jeemail.com</a>
+                        <h5 class="text-body-secondary">Email</h5><a href="mailto:shatinon@jeemail.com"><?php echo $row['email']; ?></a>
                       </div>
-                      <h5 class="text-body-secondary">Phone</h5><a class="text-body-secondary" href="tel:+1234567890">+1234567890</a>
+                      <h5 class="text-body-secondary">Phone</h5><a class="text-body-secondary" href="tel:+1234567890"><?php echo $row['mobile']; ?></a>
                     </div>
                   </div>
                 </div>
-                <div class="col-12">
-                  <div class="card">
-                    <div class="card-body">
-                      <h3 class="mb-4">Notes on Customer</h3><textarea class="form-control mb-3" rows="4"></textarea><button class="btn btn-phoenix-primary w-100 mb-4">Add Note</button>
-                      <div class="fs-9 fw-semibold pb-4 mb-4 border-bottom border-dashed">
-                        <p class="text-body-highlight mb-1">Gave us a nice feedback</p>
-                        <div class="text-end">
-                          <p class="text-body-tertiary text-opacity-85 mb-0">12 Nov, 2020</p>
-                        </div>
-                      </div>
-                      <div class="fs-9 fw-semibold pb-4 mb-4 border-bottom border-dashed">
-                        <p class="text-body-highlight mb-1">Customer added product to cart and then forgot to checkout. Later knocked the customer support to ask about update on shipping. Later, settled on “One day Shipping” though “Free delivery” was preferred. Overall good behavior.</p>
-                        <div class="text-end">
-                          <p class="text-body-tertiary text-opacity-85 mb-0">23 Dec, 2019</p>
-                        </div>
-                      </div>
-                      <div class="fs-9 fw-semibold pb-4 mb-4 border-bottom border-dashed">
-                        <p class="text-body-highlight mb-1">User of this support ticket won a 100% off coupon and received top-notch service from the technical support engineer. Along with providing a good review, user highly appreciated the team.</p>
-                        <div class="text-end">
-                          <p class="text-body-tertiary text-opacity-85 mb-0">2 Oct, 2019</p>
-                        </div>
-                      </div>
-                      <div class="fs-9 fw-semibold">
-                        <p class="text-body-highlight mb-1">Customer returned and bought 2 related items, which is currently being shipped. Customer chose “One day Shipping”. Additional notes were added regarding customised wrapping. Customer submitted positive review.</p>
-                        <div class="text-end">
-                          <p class="text-body-tertiary text-opacity-85 mb-0">26 Apr, 2019</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                                       <?php
+    }
+}
+?>
+
+          <div class="col-12">
+  <div class="card">
+    <div class="card-body">
+      <h3 class="mb-4">Notes on Customer</h3>
+
+      <!-- Add Note Form -->
+      <textarea class="form-control mb-3" rows="4"></textarea>
+      <button class="btn btn-phoenix-primary w-100 mb-4">Add Note</button>
+
+      <!-- Notes List -->
+      <?php
+      $sql = "SELECT * FROM users_notes where  users_id = $id ";
+      $result = mysqli_query($conn, $sql);
+
+      if (mysqli_num_rows($result) > 0) {
+          while ($row = mysqli_fetch_assoc($result)) {
+      ?>
+            <div class="fs-9 fw-semibold pb-4 mb-4 border-bottom border-dashed">
+              <p class="text-body-highlight mb-1"><?php echo $row['note']; ?></p>
+              <div class="text-end">
+                <p class="text-body-tertiary text-opacity-85 mb-0"><?php echo $row['created_at']; ?></p>
               </div>
             </div>
+      <?php
+          }
+      } else {
+          echo "<p>No notes found.</p>";
+      }
+      ?>
+    </div>
+  </div>
+</div>
+
             <div class="col-12 col-xxl-8">
               <div class="mb-6">
                 <h3 class="mb-4">Orders <span class="text-body-tertiary fw-normal">(97)</span></h3>
@@ -461,8 +469,8 @@
                 </div>
               </div>
               <div>
-                <h3 class="mb-4">Ratings & reviews <span class="text-body-tertiary fw-normal">(43)</span></h3>
-                <div class="border-top border-bottom border-translucent" id="customerRatingsTable" data-list='{"valueNames":["product","rating","review","status","date"],"page":5,"pagination":true}'>
+                <!-- <h3 class="mb-4">Ratings & reviews <span class="text-body-tertiary fw-normal">(43)</span></h3> -->
+                <!-- <div class="border-top border-bottom border-translucent" id="customerRatingsTable" data-list='{"valueNames":["product","rating","review","status","date"],"page":5,"pagination":true}'>
                   <div class="table-responsive scrollbar">
                     <table class="table fs-9 mb-0">
                       <thead>
@@ -667,7 +675,7 @@
                       <ul class="mb-0 pagination"></ul><button class="page-link pe-0" data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>

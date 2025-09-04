@@ -55,14 +55,15 @@
                         <div class="form-check mb-0 fs-8"><input class="form-check-input" id="checkbox-bulk-customers-select" type="checkbox" data-bulk-select='{"body":"customers-table-body"}' /></div>
                       </th>
                       
-                      <th class="sort align-middle pe-5" scope="col" data-sort="customer" style="width:10%;">CUSTOMER</th>
-                      <th class="sort align-middle pe-5" scope="col" data-sort="email" style="width:20%;">EMAIL</th>
-                       <th class="sort align-middle pe-5" scope="col" data-sort="email" style="width:20%;">MOBILE</th>
-                      <th class="sort align-middle text-end" scope="col" data-sort="total-orders" style="width:10%">ORDERS</th>
-                      <th class="sort align-middle text-end ps-3" scope="col" data-sort="total-spent" style="width:10%">TOTAL SPENT</th>
-                      <th class="sort align-middle ps-7" scope="col" data-sort="city" style="width:25%;">CITY</th>
-                      <th class="sort align-middle text-end" scope="col" data-sort="last-seen" style="width:15%;">LAST ORDER</th>
-                      <th class="sort align-middle text-end pe-0" scope="col" data-sort="last-order" style="width:10%;min-width: 150px;">ACTION</th>
+                     <th class="sort align-middle text-center" scope="col" data-sort="customer" style="width:10%;">CUSTOMER NAME</th>
+<th class="sort align-middle text-center" scope="col" data-sort="email" style="width:20%;">EMAIL</th>
+<th class="sort align-middle text-center" scope="col" data-sort="total-orders" style="width:10%">MOBILE</th>
+<th class="sort align-middle text-center" scope="col" data-sort="total-orders" style="width:10%">ORDERS</th>
+<th class="sort align-middle text-center" scope="col" data-sort="total-spent" style="width:30%">TOTAL SPENT</th>
+<th class="sort align-middle text-center" scope="col" data-sort="city" style="width:25%;">CITY</th>
+<th class="sort align-middle text-center" scope="col" data-sort="last-seen" style="width:15%;">LAST ORDER</th>
+<th class="sort align-middle text-center" scope="col" data-sort="last-order" style="width:10%;">ACTION</th>
+
                     </tr>
                   </thead>
                   <tbody class="list" id="customers-table-body">
@@ -85,43 +86,34 @@
           </td>
 
           <td class='customer align-middle white-space-nowrap pe-5'>
-            <a class='d-flex align-items-center text-body-emphasis' href='customer-details.php?id=".$row['id']."'>
-              <p class='mb-0 ms-3 text-body-emphasis fw-bold'>".$row['name']."</p>
+            <a class='d-flex align-items-center' href='customer_details?id=".$row['id']."'>
+              <p class='mb-0 ms-5  fw-bold'>".$row['name']."</p>
             </a>
           </td>
-          <td class='customer align-middle white-space-nowrap pe-5'>
-            <a class='d-flex align-items-center text-body-emphasis' href='customer-details.php?id=".$row['id']."'>
-              <p class='mb-0 ms-3 text-body-emphasis fw-bold'>".$row['email']."</p>
-            </a>
+          <td class='email align-middle white-space-nowrap pe-5'>
+              <p class='mb-0 ms-5  fw-bold'>".$row['email']."</p>
           </td>
+   
               <td class='customer align-middle white-space-nowrap pe-5'>
-            <a class='d-flex align-items-center text-body-emphasis' href='customer-details.php?id=".$row['id']."'>
-              <p class='mb-0 ms-3 text-body-emphasis fw-bold'>".$row['mobile']."</p>
-            </a>
+              <p class='mb-0 ms-5  fw-bold'>".$row['mobile']."</p>
           </td>
                 <td class='customer align-middle white-space-nowrap pe-5'>
-            <a class='d-flex align-items-center text-body-emphasis' href='customer-details.php?id=".$row['id']."'>
-              <p class='mb-0 ms-3 text-body-emphasis fw-bold'>".$row['orders']."</p>
-            </a>
+              <p class='mb-0 ms-5  fw-bold'>".$row['orders']."</p>
           </td>
                  <td class='customer align-middle white-space-nowrap pe-5'>
-            <a class='d-flex align-items-center text-body-emphasis' href='customer-details.php?id=".$row['id']."'>
-              <p class='mb-0 ms-3 text-body-emphasis fw-bold'>".$row['Total_spend']."</p>
-            </a>
+              <p class='mb-0 ms-5  fw-bold'>".$row['Total_spend']."</p>
           </td>
                  <td class='customer align-middle white-space-nowrap pe-5'>
-            <a class='d-flex align-items-center text-body-emphasis' href='customer-details.php?id=".$row['id']."'>
-              <p class='mb-0 ms-3 text-body-emphasis fw-bold'>".$row['city']."</p>
-            </a>
+              <p class='mb-0 ms-5  fw-bold'>".$row['city']."</p>
           </td>
            <td class='customer align-middle white-space-nowrap pe-5'>
-            <a class='d-flex align-items-center text-body-emphasis' href='customer-details.php?id=".$row['id']."'>
-              <p class='mb-0 ms-3 text-body-emphasis fw-bold'>".$row['last_order']."</p>
+              <p class='mb-0 ms-5  fw-bold'>".$row['last_order']."</p>
+          </td>
+  <td class='customer align-middle white-space-nowrap pe-5'>
+            <a class='d-flex align-items-center' href='customer_details?id=".$row['id']."'>
+             <p class='mb-0 ms-3 text-primary fw-bold fs-9'>VIEW DETAILS</p>
             </a>
           </td>
-
-         
-          <td>  View Details</td>
         </tr>";
       }
     } else {
@@ -143,5 +135,4 @@
             </div>
           </div>
         </div>
-
 </div>
