@@ -78,15 +78,18 @@ if (mysqli_num_rows($result) > 0) {
 }
 ?>
 
-          <div class="col-12">
+  <div class="col-12">
   <div class="card">
     <div class="card-body">
       <h3 class="mb-4">Notes on Customer</h3>
-
-      <!-- Add Note Form -->
-      <textarea class="form-control mb-3" rows="4"></textarea>
-      <button class="btn btn-phoenix-primary w-100 mb-4">Add Note</button>
-
+  
+<form id="noteForm">
+  <textarea name="note" id="note" class="form-control mb-3" rows="4" required></textarea>
+  <input type="hidden" name="customer_id" id="customer_id" value="<?php echo $id; ?>">
+  <button type="submit" class="btn btn-phoenix-primary w-100 mb-4">Add Note</button>
+</form>
+<!-- Where new notes will appear -->
+<div id="notesList"></div>
       <!-- Notes List -->
       <?php
       $sql = "SELECT * FROM users_notes where  users_id = $id ";
@@ -99,6 +102,12 @@ if (mysqli_num_rows($result) > 0) {
               <p class="text-body-highlight mb-1"><?php echo $row['note']; ?></p>
               <div class="text-end">
                 <p class="text-body-tertiary text-opacity-85 mb-0"><?php echo $row['created_at']; ?></p>
+                 <!-- <button class='btn btn-sm btn-danger mt-2 delete-note' data-id='<?php echo $row['id']; ?>'>Delete</button> -->
+              <span class="delete-note" data-id="<?php echo $row['id']; ?>" style="cursor:pointer;">
+  <i class="fa fa-trash text-danger ms-2"></i>
+</span>
+
+
               </div>
             </div>
       <?php
@@ -680,6 +689,65 @@ if (mysqli_num_rows($result) > 0) {
             </div>
           </div>
         </div>
+
+
+<script>
+document.getElementById("noteForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  let formData = new FormData(this);
+// Loop through all key/value pairs
+for (let [key, value] of formData.entries()) {
+  console.log(key, value);
+}
+  fetch("add_notefetch.php", {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.text()) // you can use .json() if backend returns JSON 
+  .then(data => {
+    // Show success message
+    alert("Note added successfully!");
+
+    // Optionally append note to the list without reloading
+    document.getElementById("notesList").innerHTML = data + document.getElementById("notesList").innerHTML;
+
+    // Clear textarea
+    document.getElementById("note").value = "";
+  })
+  .catch(err => console.error("Error:", err));
+});
+</script>
+
+<script>
+document.querySelectorAll(".delete-note").forEach(btn => {
+  btn.addEventListener("click", function() {
+    let noteId = this.getAttribute("data-id");
+    console.log(noteId);
+
+    if (confirm("Are you sure you want to delete this note?")) {
+      fetch("delete_note.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "id=" + encodeURIComponent(noteId)
+      })
+      .then(res => res.text())
+      .then(data => {
+        if (data.trim() === "success") {
+          // Remove note from DOM
+          document.getElementById("note-" + noteId).remove();
+        } else {
+          alert("Failed to delete note: " + data);
+        }
+      })
+      .catch(err => console.error("Error:", err));
+    }
+  });
+});
+</script>
+
         <footer class="footer position-absolute">
           <div class="row g-0 justify-content-between align-items-center h-100">
             <div class="col-12 col-sm-auto text-center">
