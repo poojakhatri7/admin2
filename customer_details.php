@@ -62,64 +62,96 @@ if (mysqli_num_rows($result) > 0) {
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex align-items-center mb-3">
-                        <h3 class="me-1">Customer Address</h3><button class="btn btn-link p-0"><span class="fas fa-pen fs-8 ms-3 text-body-quaternary"></span></button>
+                        <h3 class="me-1">Customer Address</h3><button class="btn btn-link p-0">
+<a href="#" class="text-white mx-1 fas fa-pen fs-8 ms-3 text-body-quaternary"
+      style="cursor:pointer;"
+      data-bs-toggle="modal"
+      data-bs-target="#modal-default"></a>
+
                       </div>
                       <h5 class="text-body-secondary">Address</h5>
                       <p class="text-body-secondary"><?php echo $row['address']; ?><br /><?php echo $row['city']; ?><br /><?php echo $row['State']; ?></p>
                       <div class="mb-3">
                         <h5 class="text-body-secondary">Email</h5><a href="mailto:shatinon@jeemail.com"><?php echo $row['email']; ?></a>
                       </div>
-                      <h5 class="text-body-secondary">Phone</h5><a class="text-body-secondary" href="tel:+1234567890"><?php echo $row['mobile']; ?></a>
+                      <h5 class="text-body-secondary">Mobile</h5><a class="text-body-secondary" href="tel:+1234567890"><?php echo $row['mobile']; ?></a>
                     </div>
                   </div>
                 </div>
-                                       <?php
+<?php
     }
 }
 ?>
+  <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Edit Customer Details </h4>
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
+              </button>
+            </div>
+            <div class="modal-body">
+          <!-- <h4 style="color:rgb(1, 12, 6);" >Add New Services </h4> -->
+        
+            <form id="appointment_form" >
+            <div class="form-group">
+            <div id="message"></div>
+         
+                        <label for="mobile" class="custom-label" >Mobile</label>
+                        <input type="tel" name="mobile" class="form-control" id="mobile" placeholder="Enter Mobile number" pattern="[0-9]{10}"
+       maxlength="10"
+       minlength="10" required>
+                      
+                    </div>
+
+          <span id="error-message" style="color: red; display: block; font-weight:600; margin-bottom: 15px; text-align: justify; padding-left: 50px;"></span>
+
+          <div class="mb-3">
+            <label for="name" class="custom-label">Name</label>
+            <input type="text" name="name" pattern="[A-Za-z\s]+" class="form-control" id="name" placeholder="Enter Name" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="custom-label">Email</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="Enter Email">
+          </div>
+
+          <div class="mb-3">
+            <label for="address" class="custom-label">Address</label>
+            <input type="text" name="address" class="form-control" id="address" placeholder="Enter Address" required>
+          </div>
+                    <br>
+                    <div class="modal-footer justify-content-between">
+           <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="background-color: rgba(255, 0, 0);">Close</button>
+
+              <button type="submit" name="submit" id="submitBtn1" class="btn btn-primary" style=" background-color: rgba(54, 168, 206, 1);">Add</button>
+            </div>
+                </form>
+                <div id="message"></div>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
   <div class="col-12">
   <div class="card">
     <div class="card-body">
       <h3 class="mb-4">Notes on Customer</h3>
-  
 <form id="noteForm">
   <textarea name="note" id="note" class="form-control mb-3" rows="4" required></textarea>
   <input type="hidden" name="customer_id" id="customer_id" value="<?php echo $id; ?>">
-  <button type="submit" class="btn btn-phoenix-primary w-100 mb-4">Add Note</button>
+  <button type="submit" class="btn btn-phoenix-primary  w-100 mb-4" style=" background-color: rgba(54, 168, 206, 1); color: black; font-size: 15px;" >Add Note</button>
 </form>
 <!-- Where new notes will appear -->
+<div id="notes-container" data-userid="<?php echo $id; ?>"></div>
 <div id="notesList"></div>
-      <!-- Notes List -->
-      <?php
-      $sql = "SELECT * FROM users_notes where  users_id = $id ";
-      $result = mysqli_query($conn, $sql);
-
-      if (mysqli_num_rows($result) > 0) {
-          while ($row = mysqli_fetch_assoc($result)) {
-      ?>
-            <div class="fs-9 fw-semibold pb-4 mb-4 border-bottom border-dashed">
-              <p class="text-body-highlight mb-1"><?php echo $row['note']; ?></p>
-              <div class="text-end">
-                <p class="text-body-tertiary text-opacity-85 mb-0"><?php echo $row['created_at']; ?></p>
-                 <!-- <button class='btn btn-sm btn-danger mt-2 delete-note' data-id='<?php echo $row['id']; ?>'>Delete</button> -->
-              <span class="delete-note" data-id="<?php echo $row['id']; ?>" style="cursor:pointer;">
-  <i class="fa fa-trash text-danger ms-2"></i>
-</span>
-
-
-              </div>
-            </div>
-      <?php
-          }
-      } else {
-          echo "<p>No notes found.</p>";
-      }
-      ?>
+  
+      
     </div>
   </div>
 </div>
-
             <div class="col-12 col-xxl-8">
               <div class="mb-6">
                 <h3 class="mb-4">Orders <span class="text-body-tertiary fw-normal">(97)</span></h3>
@@ -130,6 +162,8 @@ if (mysqli_num_rows($result) > 0) {
                         <tr>
                           <th class="sort white-space-nowrap align-middle ps-0 pe-3" scope="col" data-sort="order" style="width:10%;">ORDER</th>
                           <th class="sort align-middle text-end pe-7" scope="col" data-sort="total" style="width:10%;">TOTAL</th>
+                           <th class="sort align-middle text-end pe-7" scope="col" data-sort="total" style="width:10%;">DISCOUNT</th>
+                           <th class="sort align-middle text-end pe-7" scope="col" data-sort="total" style="width:10%;">TOTAL AFTER DISCOUNT</th>
                           <th class="sort align-middle white-space-nowrap pe-3" scope="col" data-sort="payment_status" style="width:15%;">PAYMENT STATUS</th>
                           <th class="sort align-middle white-space-nowrap text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:20%;">FULFILMENT STATUS</th>
                           <th class="sort align-middle white-space-nowrap text-start" scope="col" data-sort="delivery_type" style="width:30%;">DELIVERY TYPE</th>
@@ -140,226 +174,15 @@ if (mysqli_num_rows($result) > 0) {
                       <tbody class="list" id="customer-order-table-body">
                         <tr class="hover-actions-trigger btn-reveal-trigger position-static">
                           <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semibold" href="#!">#2453</a></td>
-                          <td class="total align-middle text-end fw-semibold pe-7 text-body-highlight">$87</td>
-                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="badge-label">Paid</span><span class="ms-1" data-feather="check" style="height:12.8px;width:12.8px;"></span></span></td>
+                          <td class="total align-middle text-center fw-semibold pe-7 text-body-highlight">$87</td>
+                          <td class="total align-middle text-center fw-semibold pe-7 text-body-highlight">$87</td>
+                           <td class="total align-middle text-center fw-semibold pe-7 text-body-highlight">$87</td>
+                          <td class="payment_status align-middle white-space-nowrap text- fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="badge-label">Paid</span><span class="ms-1" data-feather="check" style="height:12.8px;width:12.8px;"></span></span></td>
                           <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="badge-label">Order Fulfilled</span><span class="ms-1" data-feather="check" style="height:12.8px;width:12.8px;"></span></span></td>
                           <td class="delivery_type align-middle white-space-nowrap text-body fs-9 text-start">Cash on delivery</td>
                           <td class="date align-middle white-space-nowrap text-body-tertiary fs-9 ps-4 text-end">Dec 12, 12:56 PM</td>
                           <td class="align-middle white-space-nowrap text-end pe-0 ps-5">
-                            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-                              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semibold" href="#!">#2452</a></td>
-                          <td class="total align-middle text-end fw-semibold pe-7 text-body-highlight">$7264</td>
-                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-secondary"><span class="badge-label">Cancelled</span><span class="ms-1" data-feather="x" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-info"><span class="badge-label">Ready to pickup</span><span class="ms-1" data-feather="info" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="delivery_type align-middle white-space-nowrap text-body fs-9 text-start">Free shipping</td>
-                          <td class="date align-middle white-space-nowrap text-body-tertiary fs-9 ps-4 text-end">Dec 9, 2:28PM</td>
-                          <td class="align-middle white-space-nowrap text-end pe-0 ps-5">
-                            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-                              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semibold" href="#!">#2451</a></td>
-                          <td class="total align-middle text-end fw-semibold pe-7 text-body-highlight">$375</td>
-                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="badge-label">Pending</span><span class="ms-1" data-feather="alert-octagon" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="badge-label">Partial FulfiLled</span><span class="ms-1" data-feather="alert-octagon" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="delivery_type align-middle white-space-nowrap text-body fs-9 text-start">Local pickup</td>
-                          <td class="date align-middle white-space-nowrap text-body-tertiary fs-9 ps-4 text-end">Dec 4, 12:56 PM</td>
-                          <td class="align-middle white-space-nowrap text-end pe-0 ps-5">
-                            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-                              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semibold" href="#!">#2450</a></td>
-                          <td class="total align-middle text-end fw-semibold pe-7 text-body-highlight">$657</td>
-                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-secondary"><span class="badge-label">Cancelled</span><span class="ms-1" data-feather="x" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-secondary"><span class="badge-label">Order CancelLed</span><span class="ms-1" data-feather="x" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="delivery_type align-middle white-space-nowrap text-body fs-9 text-start">Standard shipping</td>
-                          <td class="date align-middle white-space-nowrap text-body-tertiary fs-9 ps-4 text-end">Dec 1, 4:07 AM</td>
-                          <td class="align-middle white-space-nowrap text-end pe-0 ps-5">
-                            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-                              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semibold" href="#!">#2449</a></td>
-                          <td class="total align-middle text-end fw-semibold pe-7 text-body-highlight">$9562</td>
-                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-danger"><span class="badge-label">Failed</span><span class="ms-1" data-feather="alert-octagon" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="badge-label">Order Fulfilled</span><span class="ms-1" data-feather="check" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="delivery_type align-middle white-space-nowrap text-body fs-9 text-start">Express</td>
-                          <td class="date align-middle white-space-nowrap text-body-tertiary fs-9 ps-4 text-end">Nov 28, 7:28 PM</td>
-                          <td class="align-middle white-space-nowrap text-end pe-0 ps-5">
-                            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-                              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semibold" href="#!">#2448</a></td>
-                          <td class="total align-middle text-end fw-semibold pe-7 text-body-highlight">$46</td>
-                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="badge-label">Paid</span><span class="ms-1" data-feather="check" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-danger"><span class="badge-label">Delivery Delayed</span><span class="ms-1" data-feather="alert-octagon" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="delivery_type align-middle white-space-nowrap text-body fs-9 text-start">Local delivery</td>
-                          <td class="date align-middle white-space-nowrap text-body-tertiary fs-9 ps-4 text-end">Nov 24, 10:16 AM</td>
-                          <td class="align-middle white-space-nowrap text-end pe-0 ps-5">
-                            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-                              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semibold" href="#!">#2447</a></td>
-                          <td class="total align-middle text-end fw-semibold pe-7 text-body-highlight">$953</td>
-                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="badge-label">Pending</span><span class="ms-1" data-feather="alert-octagon" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="badge-label">Fulfiled</span><span class="ms-1" data-feather="check" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="delivery_type align-middle white-space-nowrap text-body fs-9 text-start">Cash on delivery</td>
-                          <td class="date align-middle white-space-nowrap text-body-tertiary fs-9 ps-4 text-end">Nov 18, 5:43 PM</td>
-                          <td class="align-middle white-space-nowrap text-end pe-0 ps-5">
-                            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-                              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semibold" href="#!">#2446</a></td>
-                          <td class="total align-middle text-end fw-semibold pe-7 text-body-highlight">$12</td>
-                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="badge-label">Pending</span><span class="ms-1" data-feather="alert-octagon" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="badge-label">Fulfiled</span><span class="ms-1" data-feather="check" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="delivery_type align-middle white-space-nowrap text-body fs-9 text-start">Standard shipping</td>
-                          <td class="date align-middle white-space-nowrap text-body-tertiary fs-9 ps-4 text-end">Nov 18, 2:09 AM</td>
-                          <td class="align-middle white-space-nowrap text-end pe-0 ps-5">
-                            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-                              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semibold" href="#!">#2445</a></td>
-                          <td class="total align-middle text-end fw-semibold pe-7 text-body-highlight">$3927</td>
-                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="badge-label">Paid</span><span class="ms-1" data-feather="check" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-secondary"><span class="badge-label">Canceled</span><span class="ms-1" data-feather="x" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="delivery_type align-middle white-space-nowrap text-body fs-9 text-start">Cash on delivery</td>
-                          <td class="date align-middle white-space-nowrap text-body-tertiary fs-9 ps-4 text-end">Nov 16, 3:22 PM</td>
-                          <td class="align-middle white-space-nowrap text-end pe-0 ps-5">
-                            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-                              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semibold" href="#!">#2444</a></td>
-                          <td class="total align-middle text-end fw-semibold pe-7 text-body-highlight">$5937</td>
-                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="badge-label">Paid</span><span class="ms-1" data-feather="check" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-secondary"><span class="badge-label">Ready to pickup</span><span class="ms-1" data-feather="info" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="delivery_type align-middle white-space-nowrap text-body fs-9 text-start">Local pickup</td>
-                          <td class="date align-middle white-space-nowrap text-body-tertiary fs-9 ps-4 text-end">Nov 09, 8:49 AM</td>
-                          <td class="align-middle white-space-nowrap text-end pe-0 ps-5">
-                            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-                              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semibold" href="#!">#2443</a></td>
-                          <td class="total align-middle text-end fw-semibold pe-7 text-body-highlight">$124</td>
-                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-danger"><span class="badge-label">Failed</span><span class="ms-1" data-feather="minus-circle" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-danger"><span class="badge-label">Unfulfiled</span><span class="ms-1" data-feather="x" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="delivery_type align-middle white-space-nowrap text-body fs-9 text-start">Cash on delivery</td>
-                          <td class="date align-middle white-space-nowrap text-body-tertiary fs-9 ps-4 text-end">Nov 05, 4:35 PM</td>
-                          <td class="align-middle white-space-nowrap text-end pe-0 ps-5">
-                            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-                              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semibold" href="#!">#2442</a></td>
-                          <td class="total align-middle text-end fw-semibold pe-7 text-body-highlight">$542</td>
-                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="badge-label">Pending</span><span class="ms-1" data-feather="alert-octagon" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="badge-label">Fulfiled</span><span class="ms-1" data-feather="check" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="delivery_type align-middle white-space-nowrap text-body fs-9 text-start">Standard shipping</td>
-                          <td class="date align-middle white-space-nowrap text-body-tertiary fs-9 ps-4 text-end">Nov 05, 12:00 PM</td>
-                          <td class="align-middle white-space-nowrap text-end pe-0 ps-5">
-                            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-                              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semibold" href="#!">#2441</a></td>
-                          <td class="total align-middle text-end fw-semibold pe-7 text-body-highlight">$1480</td>
-                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="badge-label">Paid</span><span class="ms-1" data-feather="check" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-info"><span class="badge-label">Ready to pickup</span><span class="ms-1" data-feather="info" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="delivery_type align-middle white-space-nowrap text-body fs-9 text-start">Local delivery</td>
-                          <td class="date align-middle white-space-nowrap text-body-tertiary fs-9 ps-4 text-end">Nov 02, 2:00 AM</td>
-                          <td class="align-middle white-space-nowrap text-end pe-0 ps-5">
-                            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-                              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semibold" href="#!">#2440</a></td>
-                          <td class="total align-middle text-end fw-semibold pe-7 text-body-highlight">$80</td>
-                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-secondary"><span class="badge-label">Cancelled</span><span class="ms-1" data-feather="x" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-danger"><span class="badge-label">Unfulfiled</span><span class="ms-1" data-feather="x" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="delivery_type align-middle white-space-nowrap text-body fs-9 text-start">Free shipping</td>
-                          <td class="date align-middle white-space-nowrap text-body-tertiary fs-9 ps-4 text-end">Oct 30, 4:25 PM</td>
-                          <td class="align-middle white-space-nowrap text-end pe-0 ps-5">
-                            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-                              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semibold" href="#!">#2439</a></td>
-                          <td class="total align-middle text-end fw-semibold pe-7 text-body-highlight">$999</td>
-                          <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-warning"><span class="badge-label">Pending</span><span class="ms-1" data-feather="alert-octagon" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="badge-label">Fulfiled</span><span class="ms-1" data-feather="check" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="delivery_type align-middle white-space-nowrap text-body fs-9 text-start">Cash on delivery</td>
-                          <td class="date align-middle white-space-nowrap text-body-tertiary fs-9 ps-4 text-end">Oct 28, 3:00 PM</td>
-                          <td class="align-middle white-space-nowrap text-end pe-0 ps-5">
-                            <div class="btn-reveal-trigger position-static"><button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs-10" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span class="fas fa-ellipsis-h fs-10"></span></button>
-                              <div class="dropdown-menu dropdown-menu-end py-2"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Export</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Remove</a>
-                              </div>
+                          
                             </div>
                           </td>
                         </tr>
@@ -399,70 +222,6 @@ if (mysqli_num_rows($result) > 0) {
                           <td class="size align-middle white-space-nowrap text-body-tertiary fs-9 fw-semibold">42</td>
                           <td class="price align-middle text-body fs-9 fw-semibold text-end">$57</td>
                           <td class="total align-middle fw-bold text-body-highlight text-end">$57</td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="align-middle white-space-nowrap py-1"><a class="border border-translucent rounded-2 d-inline-block" href="../landing/product-details.html"><img src="../../../assets/img/products/7.png" alt="" width="40" height="40" /></a></td>
-                          <td class="products align-middle"><a class="fw-semibold mb-0" href="../landing/product-details.html">2021 Apple 12.9-inch iPad Pro (Wi‑Fi, ...</a></td>
-                          <td class="color align-middle white-space-nowrap fs-9 text-body">Black</td>
-                          <td class="size align-middle white-space-nowrap text-body-tertiary fs-9 fw-semibold">Pro</td>
-                          <td class="price align-middle text-body fs-9 fw-semibold text-end">$1,499</td>
-                          <td class="total align-middle fw-bold text-body-highlight text-end">$1499</td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="align-middle white-space-nowrap py-1"><a class="border border-translucent rounded-2 d-inline-block" href="../landing/product-details.html"><img src="../../../assets/img/products/6.png" alt="" width="40" height="40" /></a></td>
-                          <td class="products align-middle"><a class="fw-semibold mb-0" href="../landing/product-details.html">PlayStation 5 DualSense Wireless Cont...</a></td>
-                          <td class="color align-middle white-space-nowrap fs-9 text-body">White</td>
-                          <td class="size align-middle white-space-nowrap text-body-tertiary fs-9 fw-semibold">Regular</td>
-                          <td class="price align-middle text-body fs-9 fw-semibold text-end">$299</td>
-                          <td class="total align-middle fw-bold text-body-highlight text-end">$359</td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="align-middle white-space-nowrap py-1"><a class="border border-translucent rounded-2 d-inline-block" href="../landing/product-details.html"><img src="../../../assets/img/products/3.png" alt="" width="40" height="40" /></a></td>
-                          <td class="products align-middle"><a class="fw-semibold mb-0" href="../landing/product-details.html">Apple MacBook Pro 13 inch-M1-8/256G...</a></td>
-                          <td class="color align-middle white-space-nowrap fs-9 text-body">Space Gray</td>
-                          <td class="size align-middle white-space-nowrap text-body-tertiary fs-9 fw-semibold">Pro</td>
-                          <td class="price align-middle text-body fs-9 fw-semibold text-end">$1,699</td>
-                          <td class="total align-middle fw-bold text-body-highlight text-end">$1,799</td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="align-middle white-space-nowrap py-1"><a class="border border-translucent rounded-2 d-inline-block" href="../landing/product-details.html"><img src="../../../assets/img/products/4.png" alt="" width="40" height="40" /></a></td>
-                          <td class="products align-middle"><a class="fw-semibold mb-0" href="../landing/product-details.html">Apple iMac 24&quot; 4K Retina Display M1 8 C...</a></td>
-                          <td class="color align-middle white-space-nowrap fs-9 text-body">Ocean Blue</td>
-                          <td class="size align-middle white-space-nowrap text-body-tertiary fs-9 fw-semibold">21&quot;</td>
-                          <td class="price align-middle text-body fs-9 fw-semibold text-end">$65</td>
-                          <td class="total align-middle fw-bold text-body-highlight text-end">$65</td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="align-middle white-space-nowrap py-1"><a class="border border-translucent rounded-2 d-inline-block" href="../landing/product-details.html"><img src="../../../assets/img/products/10.png" alt="" width="40" height="40" /></a></td>
-                          <td class="products align-middle"><a class="fw-semibold mb-0" href="../landing/product-details.html">Apple Magic Mouse (Wireless, Recharg...</a></td>
-                          <td class="color align-middle white-space-nowrap fs-9 text-body">White</td>
-                          <td class="size align-middle white-space-nowrap text-body-tertiary fs-9 fw-semibold">Regular</td>
-                          <td class="price align-middle text-body fs-9 fw-semibold text-end">$30</td>
-                          <td class="total align-middle fw-bold text-body-highlight text-end">$60</td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="align-middle white-space-nowrap py-1"><a class="border border-translucent rounded-2 d-inline-block" href="../landing/product-details.html"><img src="../../../assets/img/products/8.png" alt="" width="40" height="40" /></a></td>
-                          <td class="products align-middle"><a class="fw-semibold mb-0" href="../landing/product-details.html">Amazon Basics Matte Black Wired Keybo...</a></td>
-                          <td class="color align-middle white-space-nowrap fs-9 text-body">Black</td>
-                          <td class="size align-middle white-space-nowrap text-body-tertiary fs-9 fw-semibold">MD</td>
-                          <td class="price align-middle text-body fs-9 fw-semibold text-end">$40</td>
-                          <td class="total align-middle fw-bold text-body-highlight text-end">$40</td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="align-middle white-space-nowrap py-1"><a class="border border-translucent rounded-2 d-inline-block" href="../landing/product-details.html"><img src="../../../assets/img/products/12.png" alt="" width="40" height="40" /></a></td>
-                          <td class="products align-middle"><a class="fw-semibold mb-0" href="../landing/product-details.html">HORI Racing Wheel Apex for PlayStation...</a></td>
-                          <td class="color align-middle white-space-nowrap fs-9 text-body">Black</td>
-                          <td class="size align-middle white-space-nowrap text-body-tertiary fs-9 fw-semibold">45</td>
-                          <td class="price align-middle text-body fs-9 fw-semibold text-end">$130</td>
-                          <td class="total align-middle fw-bold text-body-highlight text-end">$130</td>
-                        </tr>
-                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="align-middle white-space-nowrap py-1"><a class="border border-translucent rounded-2 d-inline-block" href="../landing/product-details.html"><img src="../../../assets/img/products/17.png" alt="" width="40" height="40" /></a></td>
-                          <td class="products align-middle"><a class="fw-semibold mb-0" href="../landing/product-details.html">Xbox Series S</a></td>
-                          <td class="color align-middle white-space-nowrap fs-9 text-body">Space Gray</td>
-                          <td class="size align-middle white-space-nowrap text-body-tertiary fs-9 fw-semibold">sm</td>
-                          <td class="price align-middle text-body fs-9 fw-semibold text-end">$99</td>
-                          <td class="total align-middle fw-bold text-body-highlight text-end">$99</td>
                         </tr>
                       </tbody>
                     </table>
@@ -692,6 +451,47 @@ if (mysqli_num_rows($result) > 0) {
 
 
 <script>
+function loadNotes(userId) {
+  console.log(userId)
+  fetch("retrieve_notefetch.php?id=" + userId)
+    .then(response => response.json())
+    .then(notes => {
+      let container = document.getElementById("notes-container");
+      container.innerHTML = ""; // clear old notes
+
+      if (notes.length === 0) {
+        container.innerHTML = "<p>No notes found.</p>";
+        return;
+      }
+
+      for (let note of notes) {  
+        container.innerHTML += `
+          <div class="fs-9 fw-semibold pb-4 mb-4 border-bottom border-dashed">
+            <p class="text-body-highlight mb-1">${note.note}</p>
+            <div class="text-end">
+              <p class="text-body-tertiary text-opacity-85 mb-0">${note.created_at}</p>
+              <span class="delete-note" data-id="${note.id}" style="cursor:pointer;">
+                <i class="fa fa-trash text-danger ms-2"></i>
+              </span>
+            </div>
+          </div>
+        `;
+      }
+    })
+    .catch(err => {
+      console.error("Error loading notes:", err);
+    });
+}
+
+// Example: call with a userId (replace with actual)
+let container = document.getElementById("notes-container");
+let userId = container.dataset.userid;   // <-- here
+loadNotes(userId);
+</script>
+
+
+
+<script>
 document.getElementById("noteForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
@@ -719,7 +519,7 @@ for (let [key, value] of formData.entries()) {
 });
 </script>
 
-<script>
+<!-- <script>
 document.querySelectorAll(".delete-note").forEach(btn => {
   btn.addEventListener("click", function() {
     let noteId = this.getAttribute("data-id");
@@ -746,12 +546,65 @@ document.querySelectorAll(".delete-note").forEach(btn => {
     }
   });
 });
-</script>
+</script> -->
+<script>
+// document.querySelectorAll(".delete-note").forEach(btn => {
+//   btn.addEventListener("click", function() {
+//     let noteId = this.getAttribute("data-id");
 
+//     if (confirm("Are you sure you want to delete this note?")) {
+//       fetch("delete_note.php", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/x-www-form-urlencoded"
+//         },
+//         body: "id=" + encodeURIComponent(noteId)
+//       })
+//       .then(res => res.text())
+//       .then(data => {
+//         if (data.trim() === "success") {
+//           // ✅ Immediately remove the note card from DOM
+//           let noteElement = document.getElementById("note-" + noteId);
+//           if (noteElement) {
+//             noteElement.remove();
+//           }
+//         } else {
+//           alert("Failed to delete note: " + data);
+//         }
+//       })
+//       .catch(err => console.error("Error:", err));
+//     }
+//   });
+// });
+document.addEventListener("click", function(e) {
+  if (e.target.closest(".delete-note")) {
+    let noteId = e.target.closest(".delete-note").dataset.id;
+
+    if (confirm("Are you sure you want to delete this note?")) {
+      fetch("delete_note.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "id=" + noteId
+      })
+      .then(res => res.text())
+      .then(result => {
+        if (result === "success") {
+          e.target.closest(".fs-9").remove(); // remove note div from DOM
+        } else {
+          alert("Failed to delete note.");
+        }
+      })
+      .catch(err => console.error("Error deleting note:", err));
+    }
+  }
+});
+
+
+</script>
         <footer class="footer position-absolute">
           <div class="row g-0 justify-content-between align-items-center h-100">
             <div class="col-12 col-sm-auto text-center">
-              <p class="mb-0 mt-2 mt-sm-0 text-body">Thank you for creating with Phoenix<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2025 &copy;<a class="mx-1" href="https://themewagon.com/">Themewagon</a></p>
+              <p class="mb-0 mt-2 mt-sm-0 text-body">Copyright &copy; 2025 E-Commerce Software. All right reserved.<span class="d-none d-sm-inline-block"></span></p>
             </div>
             <div class="col-12 col-sm-auto text-center">
               <p class="mb-0 text-body-tertiary text-opacity-85">v1.23.0</p>
