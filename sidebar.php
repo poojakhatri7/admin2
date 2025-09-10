@@ -111,13 +111,13 @@
   <div class="collapse" id="nv-products" data-bs-parent="#navbarVerticalNav">
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link" href="add-product.php">
+        <a class="nav-link" href="add_products">
           <span data-feather="plus-square"></span>
           <span class="submenu-text">Add Product</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="available-product.php">
+        <a class="nav-link" href="available_products">
           <span data-feather="archive"></span>
           <span class="submenu-text">Available Product</span>
         </a>
@@ -135,7 +135,7 @@
 
   <!-- Orders -->
   <div class="nav-item-wrapper">
-    <a class="nav-link dropdown-indicator label-1" href="#nv-orders" role="button">
+    <a class="nav-link dropdown-indicator label-1" href="orders" role="button">
       <div class="d-flex align-items-center">
         <div class="dropdown-indicator-icon-wrapper"></div>
         <span class="nav-link-icon">

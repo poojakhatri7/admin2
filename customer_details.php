@@ -154,38 +154,56 @@ if (mysqli_num_rows($result) > 0) {
 </div>
             <div class="col-12 col-xxl-8">
               <div class="mb-6">
-                <h3 class="mb-4">Orders <span class="text-body-tertiary fw-normal">(97)</span></h3>
+                <h3 class="mb-4">Orders <span class="text-body-tertiary fw-normal">
+
+
+                </span></h3>
                 <div class="border-top border-bottom border-translucent" id="customerOrdersTable" data-list='{"valueNames":["order","total","payment_status","fulfilment_status","delivery_type","date"],"page":6,"pagination":true}'>
                   <div class="table-responsive scrollbar">
                     <table class="table table-sm fs-9 mb-0">
                       <thead>
                         <tr>
-                          <th class="sort white-space-nowrap align-middle ps-0 pe-3" scope="col" data-sort="order" style="width:10%;">ORDER</th>
+                          <th class="sort white-space-nowrap align-middle ps-0 pe-3" scope="col" data-sort="order" style="width:10%;">Sno.</th>
+                           <th class="sort white-space-nowrap align-middle ps-0 pe-3" scope="col" data-sort="order" style="width:10%;">ORDER</th>
                           <th class="sort align-middle text-end pe-7" scope="col" data-sort="total" style="width:10%;">TOTAL</th>
                            <th class="sort align-middle text-end pe-7" scope="col" data-sort="total" style="width:10%;">DISCOUNT</th>
-                           <th class="sort align-middle text-end pe-7" scope="col" data-sort="total" style="width:10%;">TOTAL AFTER DISCOUNT</th>
+                           <th class="sort align-middle white-space-nowrap pe-3" scope="col" data-sort="total" style="width:10%;">TOTAL AFTER DISCOUNT</th>
                           <th class="sort align-middle white-space-nowrap pe-3" scope="col" data-sort="payment_status" style="width:15%;">PAYMENT STATUS</th>
-                          <th class="sort align-middle white-space-nowrap text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:20%;">FULFILMENT STATUS</th>
-                          <th class="sort align-middle white-space-nowrap text-start" scope="col" data-sort="delivery_type" style="width:30%;">DELIVERY TYPE</th>
-                          <th class="sort align-middle text-end pe-0" scope="col" data-sort="date">DATE</th>
+                            <th class="sort align-middle white-space-nowrap text-start" scope="col" data-sort="delivery_type" style="width:30%;">PAYMENT TYPE</th>
+                          <th class="sort align-middle white-space-nowrap text-end pe-3" scope="col" data-sort="fulfilment_status" style="width:50%;">STATUS</th>
+                          <th class="sort align-middle text-center white-space-nowrap pe-3" scope="col" data-sort="date" style="width:50%;">DATE AND TIME</th>
                           <th class="sort text-end align-middle pe-0 ps-5" scope="col"></th>
                         </tr>
                       </thead>
+                     
                       <tbody class="list" id="customer-order-table-body">
+                                              <?php
+                      $sql = "SELECT * FROM orders where customer_id = $id order BY id DESC";
+$result = mysqli_query($conn, $sql);
+$count = 0;
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $count++;
+        ?>
+         
+
+         
                         <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semibold" href="#!">#2453</a></td>
-                          <td class="total align-middle text-center fw-semibold pe-7 text-body-highlight">$87</td>
-                          <td class="total align-middle text-center fw-semibold pe-7 text-body-highlight">$87</td>
-                           <td class="total align-middle text-center fw-semibold pe-7 text-body-highlight">$87</td>
-                          <td class="payment_status align-middle white-space-nowrap text- fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="badge-label">Paid</span><span class="ms-1" data-feather="check" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-body-tertiary"><span class="badge badge-phoenix fs-10 badge-phoenix-success"><span class="badge-label">Order Fulfilled</span><span class="ms-1" data-feather="check" style="height:12.8px;width:12.8px;"></span></span></td>
-                          <td class="delivery_type align-middle white-space-nowrap text-body fs-9 text-start">Cash on delivery</td>
-                          <td class="date align-middle white-space-nowrap text-body-tertiary fs-9 ps-4 text-end">Dec 12, 12:56 PM</td>
+                          <td class="order align-middle white-space-nowrap ps-0"><a class="fw-semibold" href="#!"><?php echo $count; ?></a></td>
+                          <td class="total align-middle text-center fw-semibold pe-7 text-body-highlight"><?php echo $row['billing_number']; ?></td>
+                          <td class="total align-middle text-center fw-semibold pe-7 text-body-highlight"><?php echo $row['totalPrice']; ?></td>
+                           <td class="total align-middle text-center fw-semibold pe-7 text-body-highlight"><?php echo $row['discount']; ?></td>
+                          <td class="payment_status align-middle white-space-nowrap text-center text- fw-bold text-body-tertiary"><?php echo $row['totalAfterDiscount']; ?><span class="ms-1"  style="height:12.8px;width:12.8px;"></span></td>
+                           <td class="payment_status align-middle white-space-nowrap text-center text- fw-bold text-body-tertiary"><?php echo $row['totalAfterDiscount']; ?><span class="ms-1"  style="height:12.8px;width:12.8px;"></span></td>
+                            <td class="payment_status align-middle white-space-nowrap text-center text- fw-bold text-body-tertiary"><?php echo $row['payment_status']; ?><span class="ms-1"  style="height:12.8px;width:12.8px;"></span></td>
+                          <td class="delivery_type align-middle white-space-nowrap text-body fs-9 text-start fw-bold text-body-tertiary"><?php echo $row['payment_type']; ?></td>
+                         <td class="delivery_type align-middle white-space-nowrap text-body fs-9 text-start fw-bold text-body-tertiary"><?php echo date("d M Y, h:i A", strtotime($row['created_at'])); ?></td>
+                
                           <td class="align-middle white-space-nowrap text-end pe-0 ps-5">
-                          
                             </div>
                           </td>
                         </tr>
+                        <?php } } ?>
                       </tbody>
                     </table>
                   </div>
@@ -200,29 +218,41 @@ if (mysqli_num_rows($result) > 0) {
                 </div>
               </div>
               <div class="mb-6">
-                <h3 class="mb-4">Wishlist <span class="text-body-tertiary fw-normal">(43)</span></h3>
+                <h3 class="mb-4">Wishlist <span class="text-body-tertiary fw-normal"></span></h3>
                 <div class="border-translucent border-top border-bottom" id="customerWishlistTable" data-list='{"valueNames":["products","color","size","price","quantity","total"],"page":5,"pagination":true}'>
                   <div class="table-responsive scrollbar">
                     <table class="table fs-9 mb-0">
                       <thead>
+                         
                         <tr>
-                          <th class="sort white-space-nowrap align-middle fs-10" scope="col" style="width:5%;"></th>
-                          <th class="sort white-space-nowrap align-middle" scope="col" style="width:35%; min-width:250px;" data-sort="products">PRODUCTS</th>
-                          <th class="sort align-middle" scope="col" data-sort="color" style="width:15%;">COLOR</th>
-                          <th class="sort align-middle" scope="col" data-sort="size" style="width:10%;">SIZE</th>
-                          <th class="sort align-middle text-end" scope="col" data-sort="price" style="width:15%;">PRICE</th>
-                          <th class="sort align-middle text-end" scope="col" data-sort="total" style="width:15%;">TOTAL</th>
+                          <th class="sort  align-middle fs-10 " scope="col" style="width:5%;"></th>
+                          <th class="sort  align-middle" scope="col" style="width:10%; min-width:200px;" data-sort="products">PRODUCTS</th>
+                          <th class="sort align-middle" scope="col" data-sort="color" style="width:15%; min-width:200px;">COLOR</th>
+                          <th class="sort align-middle" scope="col" data-sort="size" style="width:10%; min-width:200px;">SIZE</th>
+                          <th class="sort align-middle " scope="col" data-sort="price" style="width:15%; min-width:200px;">PRICE (RS)</th>
+                          <!-- <th class="sort align-middle text-middle" scope="col" data-sort="total" style="width:15%;">TOTAL</th> -->
                         </tr>
+                        <?php
+                      $sql = "SELECT * FROM users_wishlist where customer_id = $id order BY id DESC";
+$result = mysqli_query($conn, $sql);
+$count = 0;
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $count++;
+        ?>
                       </thead>
                       <tbody class="list" id="customer-wishlist-table-body">
                         <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                          <td class="align-middle white-space-nowrap py-1"><a class="border border-translucent rounded-2 d-inline-block" href="../landing/product-details.html"><img src="../../../assets/img/products/1.png" alt="" width="40" height="40" /></a></td>
-                          <td class="products align-middle"><a class="fw-semibold mb-0" href="../landing/product-details.html">Fitbit Sense Advanced Smartwatch wi...</a></td>
-                          <td class="color align-middle white-space-nowrap fs-9 text-body">Pure matte black</td>
-                          <td class="size align-middle white-space-nowrap text-body-tertiary fs-9 fw-semibold">42</td>
-                          <td class="price align-middle text-body fs-9 fw-semibold text-end">$57</td>
-                          <td class="total align-middle fw-bold text-body-highlight text-end">$57</td>
+                          <td class="align-middle white-space-nowrap py-1"><a class="border border-translucent rounded-2 d-inline-block" href="../landing/product-details.html"><img src="assets/img/products/1.png" alt="" width="40" height="40" /></a></td>
+                          <td class="products align-middle "><a class="fw-semibold mb-0" href="../landing/product-details.html"><?php echo $row['Products']; ?></a></td>
+                        <td class="color align-middle white-space-nowrap fs-9 text-body">
+    <strong><?php echo $row['color']; ?></strong>
+</td>
+                          <td class="size align-middle white-space-nowrap text-body-tertiary fs-9 fw-semibold"><strong><?php echo $row['size']; ?></strong></td>
+                          <td class="price align-middle text-body fs-9 fw-semibold text-left"><strong><?php echo $row['price']; ?></strong></td>
+                          <!-- <td class="total align-middle fw-bold text-body-highlight text-left">$57</td> -->
                         </tr>
+                          <?php } } ?>
                       </tbody>
                     </table>
                   </div>
@@ -606,9 +636,12 @@ document.addEventListener("click", function(e) {
             <div class="col-12 col-sm-auto text-center">
               <p class="mb-0 mt-2 mt-sm-0 text-body">Copyright &copy; 2025 E-Commerce Software. All right reserved.<span class="d-none d-sm-inline-block"></span></p>
             </div>
-            <div class="col-12 col-sm-auto text-center">
-              <p class="mb-0 text-body-tertiary text-opacity-85">v1.23.0</p>
-            </div>
+          <div class="col-12 col-sm-auto text-center" >
+  <a href="https://tvssolution.in/" 
+     class="mb-0 text-body-tertiary text-opacity-85 d-inline-block" style="color:rgba(54, 168, 206, 1) !important;">
+    Developed by TVS Solutions
+  </a>
+</div>
           </div>
         </footer>
       </div>
