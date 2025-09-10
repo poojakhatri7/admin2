@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Sep 09, 2025 at 01:44 PM
+-- Generation Time: Sep 10, 2025 at 01:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -208,19 +208,23 @@ INSERT INTO `enquiry_message` (`id`, `name`, `email`, `mobile`, `message`, `stat
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
+  `customer_id` int(200) NOT NULL,
   `totalPrice` decimal(10,2) NOT NULL,
   `discount` decimal(5,2) NOT NULL,
+  `totalAfterDiscount` int(200) NOT NULL,
   `billing_number` varchar(20) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `payment_status` int(6) NOT NULL
+  `payment_status` int(6) NOT NULL,
+  `delivery_status` varchar(200) NOT NULL,
+  `payment_type` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `totalPrice`, `discount`, `billing_number`, `created_at`, `payment_status`) VALUES
-(1, 500.00, 10.00, '2345', '2025-09-09 11:26:42', 1);
+INSERT INTO `orders` (`id`, `customer_id`, `totalPrice`, `discount`, `totalAfterDiscount`, `billing_number`, `created_at`, `payment_status`, `delivery_status`, `payment_type`) VALUES
+(1, 1, 500.00, 10.00, 450, '2345', '2025-09-09 11:26:42', 0, 'delivered', 'cash on delivery');
 
 -- --------------------------------------------------------
 
@@ -674,6 +678,29 @@ INSERT INTO `users_notes` (`id`, `users_id`, `note`, `created_at`) VALUES
 (45, 2, 'still payment is pending \r\n', '2025-09-09 07:00:01'),
 (46, 0, 'dfgdfg', '2025-09-09 07:25:12');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_wishlist`
+--
+
+CREATE TABLE `users_wishlist` (
+  `id` int(200) NOT NULL,
+  `customer_id` int(200) NOT NULL,
+  `Products` varchar(200) NOT NULL,
+  `color` varchar(200) NOT NULL,
+  `size` varchar(200) NOT NULL,
+  `price` varchar(200) NOT NULL,
+  `file` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users_wishlist`
+--
+
+INSERT INTO `users_wishlist` (`id`, `customer_id`, `Products`, `color`, `size`, `price`, `file`) VALUES
+(1, 1, 'Western dress', 'red', '32', '120', '');
+
 --
 -- Indexes for dumped tables
 --
@@ -830,6 +857,12 @@ ALTER TABLE `users_notes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `users_wishlist`
+--
+ALTER TABLE `users_wishlist`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -975,7 +1008,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_notes`
 --
 ALTER TABLE `users_notes`
-  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+
+--
+-- AUTO_INCREMENT for table `users_wishlist`
+--
+ALTER TABLE `users_wishlist`
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
