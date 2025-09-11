@@ -142,7 +142,7 @@ if (mysqli_num_rows($result) > 0) {
 <form id="noteForm">
   <textarea name="note" id="note" class="form-control mb-3" rows="4" required></textarea>
   <input type="hidden" name="customer_id" id="customer_id" value="<?php echo $id; ?>">
-  <button type="submit" class="btn btn-phoenix-primary  w-100 mb-4" style=" background-color: rgba(54, 168, 206, 1); color: black; font-size: 15px;" >Add Note</button>
+  <button type="submit" class="btn btn-phoenix-primary  w-100 mb-4" style=" background-color: rgba(95, 97, 230); color: white; font-size: 15px;" >Add Note</button>
 </form>
 <!-- Where new notes will appear -->
 <div id="notes-container" data-userid="<?php echo $id; ?>"></div>

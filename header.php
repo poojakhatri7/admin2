@@ -30,6 +30,9 @@
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
+    <link href="vendors/dropzone/dropzone.css" rel="stylesheet">
+    <link href="vendors/choices/choices.min.css" rel="stylesheet">
+    <link href="vendors/flatpickr/flatpickr.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
@@ -39,7 +42,9 @@
     <link href="assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
     <link href="assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
     <link href="assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+    <link rel="stylesheet" href="customstyle.css">
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+     
     <script>
       var phoenixIsRTL = window.config.config.phoenixIsRTL;
       if (phoenixIsRTL) {
@@ -161,7 +166,7 @@
       
       
      
-    </main><!-- ===============================================-->
+   
     <!--    End of Main Content-->
     <!-- ===============================================-->
 
@@ -186,7 +191,9 @@
     <script src="assets/js/phoenix.js"></script>
     <script src="vendors/echarts/echarts.min.js"></script>
     <script src="assets/js/dashboards/ecommerce-dashboard.js"></script>
-  
+ 
+
+   
 
 
 <!-- Mirrored from prium.github.io/phoenix/v1.23.0/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Aug 2025 04:43:57 GMT -->

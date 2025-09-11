@@ -1,0 +1,19 @@
+.custom-btn {
+  background-color: rgba(95, 97, 230);
+  border-color: rgba(95, 97, 230);
+  color: #fff; /* ensures text is visible */
+}
+.custom-btn:hover {
+  background-color: rgba(95, 97, 230, 0.85);
+  border-color: rgba(95, 97, 230, 0.85);
+}
+.link-purple {
+  color: rgba(95, 97, 230);
+  font-size: 20px;   /* optional, if you always want same size */
+  text-decoration: none; /* optional, remove underline */
+}
+
+.link-purple:hover {
+  color: rgba(75, 77, 200); /* slightly darker on hover */
+}
+

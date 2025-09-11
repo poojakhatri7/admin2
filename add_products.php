@@ -6,26 +6,24 @@
 
 
  <div class="content">
-        <nav class="mb-3" aria-label="breadcrumb">
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="#!">Page 1</a></li>
-            <li class="breadcrumb-item"><a href="#!">Page 2</a></li>
-            <li class="breadcrumb-item active">Default</li>
-          </ol>
-        </nav>
         <form class="mb-9">
           <div class="row g-3 flex-between-end mb-5">
             <div class="col-auto">
               <h2 class="mb-2">Add a product</h2>
-              <h5 class="text-body-tertiary fw-semibold">Orders placed across your store</h5>
+              <h5  style="color: rgba(95, 97, 230);font-size:20px;">Orders placed across your store</h5>
             </div>
-            <div class="col-auto"><button class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" type="button">Discard</button><button class="btn btn-phoenix-primary me-2 mb-2 mb-sm-0" type="button">Save draft</button><button class="btn btn-primary mb-2 mb-sm-0" type="submit">Publish product</button></div>
+            <div class="col-auto"><button class="btn btn-danger me-2 mb-2 mb-sm-0" type="reset">Discard</button>
+           
+            <button class="btn custom-btn mb-2 mb-sm-0" type="submit">Publish product</button>
+</div>
+
           </div>
           <div class="row g-5">
             <div class="col-12 col-xl-8">
               <h4 class="mb-3">Product Title</h4><input class="form-control mb-5" type="text" placeholder="Write title here..." />
               <div class="mb-6">
-                <h4 class="mb-3"> Product Description</h4><textarea class="tinymce" name="content" data-tinymce='{"height":"15rem","placeholder":"Write a description here..."}'></textarea>
+                <h4 class="mb-3"> Product Description</h4>
+                <textarea  class="form-control mb-5" name="content" data-tinymce='{"height":"15rem","placeholder":"Write a description here..."}'></textarea>
               </div>
               <h4 class="mb-3">Display images</h4>
               <div class="dropzone dropzone-multiple p-0 mb-5" id="my-awesome-dropzone" data-dropzone="data-dropzone">
@@ -46,10 +44,10 @@
                       <h4 class="mb-3 d-sm-none">Pricing</h4>
                       <div class="row g-3">
                         <div class="col-12 col-lg-6">
-                          <h5 class="mb-2 text-body-highlight">Regular price</h5><input class="form-control" type="text" placeholder="$$$" />
+                          <h5 class="mb-2 text-body-highlight">Regular price</h5><input class="form-control" type="text" placeholder="Rs" />
                         </div>
                         <div class="col-12 col-lg-6">
-                          <h5 class="mb-2 text-body-highlight">Sale price</h5><input class="form-control" type="text" placeholder="$$$" />
+                          <h5 class="mb-2 text-body-highlight">Sale price</h5><input class="form-control" type="text" placeholder="Rs" />
                         </div>
                       </div>
                     </div>
@@ -170,8 +168,10 @@
                         <div class="col-12 col-sm-6 col-xl-12">
                           <div class="mb-4">
                             <div class="d-flex flex-wrap flex-between-center mb-2">
-                              <h5 class="mb-0 text-body-highlight me-2">Category</h5><a class="fw-bold fs-9" href="#!">Add new category</a>
-                            </div><select class="form-select mb-3" aria-label="category">
+                              <h5 class="mb-0 text-body-highlight me-2">Category</h5>
+                              <a class="fw-bold fs-8 fw-bold link-purple" href="#!" >Add new category</a>
+                            </div>
+                            <select class="form-select mb-3" aria-label="category">
                               <option value="men-cloth">Men's Clothing</option>
                               <option value="women-cloth">Womens's Clothing</option>
                               <option value="kid-cloth">Kid's Clothing</option>
@@ -181,7 +181,8 @@
                         <div class="col-12 col-sm-6 col-xl-12">
                           <div class="mb-4">
                             <div class="d-flex flex-wrap flex-between-center mb-2">
-                              <h5 class="mb-0 text-body-highlight me-2">Vendor</h5><a class="fw-bold fs-9" href="#!">Add new vendor</a>
+                              <h5 class="mb-0 text-body-highlight me-2">Sub Category</h5>
+                              <a class="fw-bold  link-purple fs-8" href="#!">Add Sub Category</a>
                             </div><select class="form-select mb-3" aria-label="category">
                               <option value="men-cloth">Men's Clothing</option>
                               <option value="women-cloth">Womens's Clothing</option>
@@ -189,14 +190,14 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-12 col-sm-6 col-xl-12">
+                        <!-- <div class="col-12 col-sm-6 col-xl-12">
                           <div class="mb-4">
                             <div class="d-flex flex-wrap mb-2 flex-between-center">
                               <h5 class="mb-2 text-body-highlight">Collection</h5><a class="fw-bold fs-9" href="#!">Add new collection</a>
                             </div><input class="form-control mb-xl-3" type="text" placeholder="Collection" />
                           </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-xl-12">
+                        </div> -->
+                        <!-- <div class="col-12 col-sm-6 col-xl-12">
                           <div class="d-flex flex-wrap flex-between-center mb-2">
                             <h5 class="mb-0 text-body-highlight me-2">Tags</h5><a class="fw-bold fs-9 lh-sm" href="#!">View all tags</a>
                           </div><select class="form-select" aria-label="category">
@@ -204,7 +205,7 @@
                             <option value="women-cloth">Womens's Clothing</option>
                             <option value="kid-cloth">Kid's Clothing</option>
                           </select>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -254,6 +255,36 @@
             </div>
           </div>
         </form>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll("textarea.tinymce").forEach(el => {
+        // Parse config from data-tinymce attribute if present
+        let config = {};
+        if (el.dataset.tinymce) {
+          try {
+            config = JSON.parse(el.dataset.tinymce);
+          } catch (e) {
+            console.warn("Invalid JSON in data-tinymce:", el.dataset.tinymce);
+          }
+        }
+
+        // Default TinyMCE config
+        const defaultConfig = {
+          target: el,
+          height: 250,
+          menubar: false,
+          toolbar: "undo redo | bold italic underline | alignleft aligncenter alignright"
+        };
+
+        // Merge default + custom config
+        tinymce.init({
+          ...defaultConfig,
+          ...config
+        });
+      });
+    });
+  </script>
+
         <footer class="footer position-absolute">
           <div class="row g-0 justify-content-between align-items-center h-100">
             <div class="col-12 col-sm-auto text-center">
@@ -263,5 +294,7 @@
               <p class="mb-0 text-body-tertiary text-opacity-85">v1.23.0</p>
             </div>
           </div>
+         
         </footer>
+        
       </div>

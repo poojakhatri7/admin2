@@ -39097,3 +39097,12 @@ a[href].bg-body-secondary:hover, a[href].bg-body-secondary:focus {
   width: 3rem;
   height: 3rem;
 }
+.custom-btn {
+  background-color: rgba(95, 97, 230);
+  border-color: rgba(95, 97, 230);
+  color: #fff; /* ensures text is visible */
+}
+.custom-btn:hover {
+  background-color: rgba(95, 97, 230, 0.85);
+  border-color: rgba(95, 97, 230, 0.85);
+}
