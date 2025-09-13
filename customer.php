@@ -48,7 +48,7 @@
             </div>
             <div class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-body-emphasis border-top border-bottom border-translucent position-relative top-1">
               <div class="table-responsive scrollbar-overlay mx-n1 px-1">
-                <table class="table table-sm fs-9 mb-0">
+                <table class="table table-sm fs-9 mb-0 ">
                   <thead>
                     <tr>
                       <th class="white-space-nowrap fs-9 align-middle ps-0">

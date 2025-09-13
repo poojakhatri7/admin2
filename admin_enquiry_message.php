@@ -3,15 +3,13 @@
 <?php include 'sidebar.php'; ?>
   <?php include 'top_navbar.php'; ?>
      <div class="content">
-                      <div id="tableExample3" data-list="{&quot;valueNames&quot;:[&quot;name&quot;,&quot;email&quot;,&quot;age&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true}">
-                        <div class="search-box mb-3 mx-auto">
-                          <form class="position-relative"><input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search">
-                            <svg class="svg-inline--fa fa-magnifying-glass search-box-icon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <span class="fas fa-search search-box-icon"></span> Font Awesome fontawesome.com -->
-                          </form>
-                        </div>
-                        <div class="table-responsive">
-                          <table class="table table-striped fs-8 mb-2">
-                            <thead>
+     
+  <h2 class="mb-7">Enquiry Messages</h2>
+                     <div id="tableExample2" data-list='{"valueNames":["name","email","age"],"page":5,"pagination":{"innerWindow":2,"left":1,"right":1}}'>
+  <div class="table-responsive mx-n4  mx-lg-n6  bg-body-emphasis border-top border-bottom border-translucent position-relative mt-3">
+  <table class="table table-hover table-striped table-bordered table-sm align-middle text-center shadow-lg rounded-3 overflow-hidden fs-9 mb-0">
+  <thead class="table-primary text-dark">
+                          
                               <tr>
                                 <th class="sort border-top border-translucent ps-3" data-sort="name">Sno</th>
                                 <th class="sort border-top" data-sort="email">Name</th>

@@ -16,4 +16,9 @@
 .link-purple:hover {
   color: rgba(75, 77, 200); /* slightly darker on hover */
 }
+  .custom-font {
+    font-family: "Poppins", sans-serif; /* Or any Google Font */
+    font-size: 14px;
+  
+  }
 
