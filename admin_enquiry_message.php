@@ -75,6 +75,7 @@ if (mysqli_num_rows($result) > 0) {
                         </div>
                       </div>
                             </div>
+                            
                               </div>
 <script>
 document.querySelectorAll('.status-dropdown').forEach(function(select) {

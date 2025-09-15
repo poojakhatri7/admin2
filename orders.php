@@ -86,13 +86,13 @@
           while ($row = mysqli_fetch_assoc($result)) {
               $count++;
     ?>
-<tr class="custom-font">
+<tr >
   <td class="fw-bold"><?php echo $count ?></td>
   <td class="ps-3 text-uppercase"><?php echo $row['billing_number'] ?></td>
   <td class=" fw-semibold">90</td>
   <td>Carry Anna</td>
   <td>
-    <span class=" text-uppercase"><?php echo $row["payment_status"] ?></span>
+  <?php echo $row["payment_status"] ?>
   </td>
   <td>
     <span class=" text-dark fw-bold"><?php echo $row["delivery_status"] ?></span>

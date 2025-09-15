@@ -1,15 +1,39 @@
-
 <?php include 'db_connection.php'; ?>
 <?php include 'header.php'; ?>
 <?php include 'sidebar.php'; ?>
 <?php include 'top_navbar.php'; ?>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") 
+{
+$c_id = mysqli_real_escape_string($conn, $_POST['c_id']);
+$s_id = mysqli_real_escape_string($conn, $_POST['s_id']);
+$product_title = mysqli_real_escape_string($conn, $_POST['product_title']);
+$product_description = mysqli_real_escape_string($conn, $_POST['product_description']);
+  $sql = "INSERT INTO all_products ( product, description ,c_id, s_id) VALUES ('$product_title','$product_description','$c_id','$s_id')";
 
+// echo "<div style='text-align:center;'>
+//          <h2>$product_title</h2>
+//          <p>$product_description</p>
+//           print_r($_SERVER);
+//            <p>$c_id</p>
+//            <p>$s_id</p>
+//       </div>";
+// echo "<pre>";
+//     print_r($_POST);
+    echo "</pre>";
+      if (mysqli_query($conn, $sql)) {
+          echo "<script>alert('Service added successfully!'); window.location.href='add_products';</script>";
+      } else {
+          echo "<script>alert('Error: " . mysqli_error($conn) . "'); </script>";
+      }
+}
+?>
 
  <div class="content">
-        <form class="mb-9">
+        <form class="mb-9" action="" method="post" enctype= "multipart/form-data">
           <div class="row g-3 flex-between-end mb-5">
             <div class="col-auto">
-              <h2 class="mb-2">Add a product</h2>
+              <h2 class="mb-2">Add a Product</h2>
               <h5  style="color: rgba(95, 97, 230);font-size:20px;">Orders placed across your store</h5>
             </div>
             <div class="col-auto"><button class="btn btn-danger me-2 mb-2 mb-sm-0" type="reset">Discard</button>
@@ -19,11 +43,12 @@
 
           </div>
           <div class="row g-5">
+             
             <div class="col-12 col-xl-8">
-              <h4 class="mb-3">Product Title</h4><input class="form-control mb-5" type="text" placeholder="Write title here..." />
+              <h4 class="mb-3">Product Title</h4><input class="form-control mb-5" type="text" name="product_title" placeholder="Write title here..." />
               <div class="mb-6">
                 <h4 class="mb-3"> Product Description</h4>
-                <textarea  class="form-control mb-5" name="content" data-tinymce='{"height":"15rem","placeholder":"Write a description here..."}'></textarea>
+                <textarea  class="form-control mb-5" name="product_description" data-tinymce='{"height":"15rem","placeholder":"Write a description here..."}'></textarea>
               </div>
               <h4 class="mb-3">Display images</h4>
               <div class="dropzone dropzone-multiple p-0 mb-5" id="my-awesome-dropzone" data-dropzone="data-dropzone">
@@ -44,10 +69,13 @@
                       <h4 class="mb-3 d-sm-none">Pricing</h4>
                       <div class="row g-3">
                         <div class="col-12 col-lg-6">
-                          <h5 class="mb-2 text-body-highlight">Regular price</h5><input class="form-control" type="text" placeholder="Rs" />
+                          <h5 class="mb-2 text-body-highlight">Product Price</h5><input class="form-control" type="number" placeholder="Rs" />
                         </div>
                         <div class="col-12 col-lg-6">
-                          <h5 class="mb-2 text-body-highlight">Sale price</h5><input class="form-control" type="text" placeholder="Rs" />
+                          <h5 class="mb-2 text-body-highlight">Discount</h5><input class="form-control" type="number" placeholder="Rs" />
+                        </div>
+                           <div class="col-12 col-lg-6">
+                          <h5 class="mb-2 text-body-highlight">Offer Price</h5><input class="form-control" type="number" placeholder="Rs" />
                         </div>
                       </div>
                     </div>
@@ -169,25 +197,22 @@
                           <div class="mb-4">
                             <div class="d-flex flex-wrap flex-between-center mb-2">
                               <h5 class="mb-0 text-body-highlight me-2">Category</h5>
-                              <a class="fw-bold fs-8 fw-bold link-purple" href="#!" >Add new category</a>
+                              <span class="fw-bold fs-8 fw-bold link-purple" href="#!" >Add new category</span>
                             </div>
-                            <select class="form-select mb-3" aria-label="category">
-                              <option value="men-cloth">Men's Clothing</option>
-                              <option value="women-cloth">Womens's Clothing</option>
-                              <option value="kid-cloth">Kid's Clothing</option>
-                            </select>
+                          <select name="c_id" class="form-control" id="service">
+            <option value="">Select category</option>
+        </select>
                           </div>
                         </div>
                         <div class="col-12 col-sm-6 col-xl-12">
                           <div class="mb-4">
                             <div class="d-flex flex-wrap flex-between-center mb-2">
                               <h5 class="mb-0 text-body-highlight me-2">Sub Category</h5>
-                              <a class="fw-bold  link-purple fs-8" href="#!">Add Sub Category</a>
-                            </div><select class="form-select mb-3" aria-label="category">
-                              <option value="men-cloth">Men's Clothing</option>
-                              <option value="women-cloth">Womens's Clothing</option>
-                              <option value="kid-cloth">Kid's Clothing</option>
-                            </select>
+                              <span class="fw-bold  link-purple fs-8" href="#!">Add Sub Category</span>
+                            </div>
+                           <select name="s_id" class="form-control" id="sub_service">
+            <option value="">Select Sub category</option>
+        </select>
                           </div>
                         </div>
                         <!-- <div class="col-12 col-sm-6 col-xl-12">
@@ -210,7 +235,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-xl-12">
+                <!-- <div class="col-12 col-xl-12">
                   <div class="card">
                     <div class="card-body">
                       <h4 class="card-title mb-4">Variants</h4>
@@ -250,11 +275,93 @@
                       </div><button class="btn btn-phoenix-primary w-100" type="button">Add another option</button>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
         </form>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Function to load service categories
+    async function loadServices() {
+        try {
+            const response = await fetch("category.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: new URLSearchParams({ request_type: "service_data" })
+            });
+            const data = await response.text();
+            document.getElementById("service").innerHTML = data;
+        } catch (error) {
+            console.error("Error loading services:", error);
+        }
+    }
+
+    // Function to load sub-services based on selected category
+    async function loadSubServices(service_id) {
+        try {
+            const response = await fetch("category.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: new URLSearchParams({ request_type: "sub_service_data", id: service_id })
+            });
+            const data = await response.text();
+            document.getElementById("sub_service").innerHTML = data;
+        } catch (error) {
+            console.error("Error loading sub-services:", error);
+        }
+    }
+
+    // Load categories on page load
+    loadServices();
+
+    // On change of service category, load corresponding sub-services
+    document.getElementById("service").addEventListener("change", function () {
+        const service_id = this.value;
+        if (service_id !== "") {
+            loadSubServices(service_id);
+        } else {
+            document.getElementById("sub_service").innerHTML = '<option value="">Select Sub-Service</option>';
+        }
+    });
+
+    // On change of sub-service, load corresponding service details in the table
+    document.getElementById("sub_service").addEventListener("change", async function () {
+        const sub_service = this.value;
+        try {
+            const response = await fetch("category.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: new URLSearchParams({ sub_service: sub_service })
+            });
+            const html = await response.text();
+
+            // Extract table body from response HTML
+            const tempDiv = document.createElement("div");
+            tempDiv.innerHTML = html;
+            const tableBody = tempDiv.querySelector("tbody");
+
+            if (tableBody) {
+                document.querySelector("#example1 tbody").innerHTML = tableBody.innerHTML;
+            } else {
+                document.querySelector("#example1 tbody").innerHTML = "<tr><td colspan='5' class='text-center'>No services found.</td></tr>";
+            }
+        } catch (error) {
+            console.error("Error loading service details:", error);
+        }
+    });
+
+});
+</script>
+
+
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       document.querySelectorAll("textarea.tinymce").forEach(el => {
@@ -285,16 +392,6 @@
     });
   </script>
 
-        <footer class="footer position-absolute">
-          <div class="row g-0 justify-content-between align-items-center h-100">
-            <div class="col-12 col-sm-auto text-center">
-              <p class="mb-0 mt-2 mt-sm-0 text-body">Thank you for creating with Phoenix<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2025 &copy;<a class="mx-1" href="https://themewagon.com/">Themewagon</a></p>
-            </div>
-            <div class="col-12 col-sm-auto text-center">
-              <p class="mb-0 text-body-tertiary text-opacity-85">v1.23.0</p>
-            </div>
-          </div>
-         
-        </footer>
+     <?php include 'footer.php'; ?>
         
       </div>
