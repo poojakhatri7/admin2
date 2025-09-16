@@ -1,11 +1,11 @@
-    <?php include 'db_connection.php'; ?>
-  <?php include 'header.php'; ?>
+<?php include 'db_connection.php'; ?>
+<?php include 'header.php'; ?>
 <?php include 'sidebar.php'; ?>
-  <?php include 'top_navbar.php'; ?>
-     <div class="content">
+<?php include 'top_navbar.php'; ?>
+<div class="content">
      
   <h2 class="mb-7">Enquiry Messages</h2>
-                     <div id="tableExample2" data-list='{"valueNames":["name","email","age"],"page":5,"pagination":{"innerWindow":2,"left":1,"right":1}}'>
+  <div id="tableExample2" data-list='{"valueNames":["name","email","age"],"page":5,"pagination":{"innerWindow":2,"left":1,"right":1}}'>
   <div class="table-responsive mx-n4  mx-lg-n6  bg-body-emphasis border-top border-bottom border-translucent position-relative mt-3">
   <table class="table table-hover table-striped table-bordered table-sm align-middle text-center shadow-lg rounded-3 overflow-hidden fs-9 mb-0">
   <thead class="table-primary text-dark">
@@ -74,8 +74,9 @@ if (mysqli_num_rows($result) > 0) {
                           </div>
                         </div>
                       </div>
+                         <?php include 'footer.php'; ?>
                             </div>
-                            
+                          
                               </div>
 <script>
 document.querySelectorAll('.status-dropdown').forEach(function(select) {
@@ -100,4 +101,4 @@ document.querySelectorAll('.status-dropdown').forEach(function(select) {
   });
 });
 </script>                    
-  
+   

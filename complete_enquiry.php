@@ -1,8 +1,8 @@
-    <?php include 'db_connection.php'; ?>
-  <?php include 'header.php'; ?>
+<?php include 'db_connection.php'; ?>
+<?php include 'header.php'; ?>
 <?php include 'sidebar.php'; ?>
-  <?php include 'top_navbar.php'; ?>
-     <div class="content">
+<?php include 'top_navbar.php'; ?>
+<div class="content">
                       <div id="tableExample3" data-list="{&quot;valueNames&quot;:[&quot;name&quot;,&quot;email&quot;,&quot;age&quot;],&quot;page&quot;:5,&quot;pagination&quot;:true}">
                         <div class="search-box mb-3 mx-auto">
                           <form class="position-relative"><input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search">

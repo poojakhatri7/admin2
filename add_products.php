@@ -8,8 +8,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 $c_id = mysqli_real_escape_string($conn, $_POST['c_id']);
 $s_id = mysqli_real_escape_string($conn, $_POST['s_id']);
 $product_title = mysqli_real_escape_string($conn, $_POST['product_title']);
-$product_description = mysqli_real_escape_string($conn, $_POST['product_description']);
-  $sql = "INSERT INTO all_products ( product, description ,c_id, s_id) VALUES ('$product_title','$product_description','$c_id','$s_id')";
+$product_price = mysqli_real_escape_string($conn, $_POST['product_price']);
+$discount = mysqli_real_escape_string($conn, $_POST['discount']);
+$offer_price = mysqli_real_escape_string($conn, $_POST['offer_price']);
+$product_description = mysqli_real_escape_string($conn, $_POST['product_description']);   
+$sql = "INSERT INTO all_products ( product, description ,c_id, s_id , price, discount_percentage ,offer_price) VALUES ('$product_title','$product_description','$c_id','$s_id','$product_price','$discount','$offer_price')";
 
 // echo "<div style='text-align:center;'>
 //          <h2>$product_title</h2>
@@ -22,7 +25,7 @@ $product_description = mysqli_real_escape_string($conn, $_POST['product_descript
 //     print_r($_POST);
     echo "</pre>";
       if (mysqli_query($conn, $sql)) {
-          echo "<script>alert('Service added successfully!'); window.location.href='add_products';</script>";
+          echo "<script>alert('Product added successfully!'); window.location.href='add_products';</script>";
       } else {
           echo "<script>alert('Error: " . mysqli_error($conn) . "'); </script>";
       }
@@ -45,10 +48,10 @@ $product_description = mysqli_real_escape_string($conn, $_POST['product_descript
           <div class="row g-5">
              
             <div class="col-12 col-xl-8">
-              <h4 class="mb-3">Product Title</h4><input class="form-control mb-5" type="text" name="product_title" placeholder="Write title here..." />
+              <h4 class="mb-3">Product Title</h4><input class="form-control mb-5" type="text" name="product_title" placeholder="Write title here..."  required>
               <div class="mb-6">
                 <h4 class="mb-3"> Product Description</h4>
-                <textarea  class="form-control mb-5" name="product_description" data-tinymce='{"height":"15rem","placeholder":"Write a description here..."}'></textarea>
+                <textarea  class="form-control mb-5" name="product_description" data-tinymce='{"height":"15rem","placeholder":"Write a description here..."}' required></textarea>
               </div>
               <h4 class="mb-3">Display images</h4>
               <div class="dropzone dropzone-multiple p-0 mb-5" id="my-awesome-dropzone" data-dropzone="data-dropzone">
@@ -69,13 +72,13 @@ $product_description = mysqli_real_escape_string($conn, $_POST['product_descript
                       <h4 class="mb-3 d-sm-none">Pricing</h4>
                       <div class="row g-3">
                         <div class="col-12 col-lg-6">
-                          <h5 class="mb-2 text-body-highlight">Product Price</h5><input class="form-control" type="number" placeholder="Rs" />
+                          <h5 class="mb-2 text-body-highlight">Product Price</h5><input class="form-control" type="number" name="product_price" id="product_price" placeholder="Rs" required>
                         </div>
                         <div class="col-12 col-lg-6">
-                          <h5 class="mb-2 text-body-highlight">Discount</h5><input class="form-control" type="number" placeholder="Rs" />
+                          <h5 class="mb-2 text-body-highlight">Discount</h5><input class="form-control" type="number" name="discount" id="discount" placeholder="Rs" required>
                         </div>
                            <div class="col-12 col-lg-6">
-                          <h5 class="mb-2 text-body-highlight">Offer Price</h5><input class="form-control" type="number" placeholder="Rs" />
+                          <h5 class="mb-2 text-body-highlight">Offer Price</h5><input class="form-control" type="number" name="offer_price" id="offer_price" placeholder="Rs" required>
                         </div>
                       </div>
                     </div>
@@ -199,7 +202,7 @@ $product_description = mysqli_real_escape_string($conn, $_POST['product_descript
                               <h5 class="mb-0 text-body-highlight me-2">Category</h5>
                               <span class="fw-bold fs-8 fw-bold link-purple" href="#!" >Add new category</span>
                             </div>
-                          <select name="c_id" class="form-control" id="service">
+                          <select name="c_id" class="form-control" id="service" required>
             <option value="">Select category</option>
         </select>
                           </div>
@@ -210,7 +213,7 @@ $product_description = mysqli_real_escape_string($conn, $_POST['product_descript
                               <h5 class="mb-0 text-body-highlight me-2">Sub Category</h5>
                               <span class="fw-bold  link-purple fs-8" href="#!">Add Sub Category</span>
                             </div>
-                           <select name="s_id" class="form-control" id="sub_service">
+                           <select name="s_id" class="form-control" id="sub_service" required>
             <option value="">Select Sub category</option>
         </select>
                           </div>
@@ -391,6 +394,27 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   </script>
+  <script>
+const priceInput = document.getElementById('product_price');
+const discountInput = document.getElementById('discount');
+const offerPriceInput = document.getElementById('offer_price');
+
+function calculateOfferPrice() {
+    const price = parseFloat(priceInput.value);
+    const discount = parseFloat(discountInput.value);
+
+    if (!isNaN(price) && !isNaN(discount)) {
+        const discountAmount = (price * discount) / 100;
+        const finalPrice = price - discountAmount;
+        offerPriceInput.value = finalPrice.toFixed(2); // Round to 2 decimals
+    } else {
+        offerPriceInput.value = ''; // Clear if invalid input
+    }
+}
+
+priceInput.addEventListener('input', calculateOfferPrice);
+discountInput.addEventListener('input', calculateOfferPrice);
+</script>
 
      <?php include 'footer.php'; ?>
         

@@ -62,19 +62,19 @@
               </div> -->
             </div>
            
-            <div id="tableExample2" data-list='{"valueNames":["name","email","age"],"page":5,"pagination":{"innerWindow":2,"left":1,"right":1}}'>
+  <div id="tableExample2" data-list='{"valueNames":["name","email","age"],"page":5,"pagination":{"innerWindow":2,"left":1,"right":1}}'>
   <div class="table-responsive mx-n4  mx-lg-n6  bg-body-emphasis border-top border-bottom border-translucent position-relative mt-3">
   <table class="table table-hover table-striped table-bordered table-sm align-middle text-center shadow-lg rounded-3 overflow-hidden fs-9 mb-0">
   <thead class="table-primary text-dark">
     <tr>
       <th class="sort border-top" data-sort="name">S no.</th>
-      <th class="sort border-top border-translucent ps-3" data-sort="name">ORDERS</th>
-      <th class="sort border-top" data-sort="email">TOTAL PRICE (RS)</th>
-      <th class="sort border-top" data-sort="name">CUSTOMER</th>
-      <th class="sort border-top" data-sort="payment status">PAYMENT STATUS</th>
-      <th class="sort border-top" data-sort="age">FULFILMENT STATUS</th>
-      <th class="sort border-top" data-sort="age">DELIVERY TYPE</th>
-      <th class="sort border-top" data-sort="age">DATE</th>
+      <th class="sort border-top border-translucent ps-3" data-sort="name">Orders</th>
+      <th class="sort border-top" data-sort="email">Total Price (Rs)</th>
+      <th class="sort border-top" data-sort="name">Customer</th>
+      <th class="sort border-top" data-sort="payment status">Payment Status</th>
+      <th class="sort border-top" data-sort="age">Fulfilment Status</th>
+      <th class="sort border-top" data-sort="age">Delivery Type</th>
+      <th class="sort border-top" data-sort="age">Date</th>
     </tr>
   </thead>
   <tbody class="list">
