@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Sep 10, 2025 at 01:50 PM
+-- Generation Time: Sep 16, 2025 at 02:08 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -49,6 +49,36 @@ INSERT INTO `admin_login_details` (`id`, `name`, `mobile`, `email`, `address`, `
 (12, 'navya khatri', 8707858427, 'navya@gmail.com', 'Hazratganj', '12345', 2, 'upload-images/beauty_02.jpg', NULL, NULL),
 (16, 'anvi', 8019858421, 'anvi@gmail.com', 'Hazratganj', '1234', 2, 'upload-images/team-9.jpg', NULL, NULL),
 (25, 'Pari Kapoor', 89078431264234234, 'khatri424@gmail.com', 'Hazratganj', '1234', 2, 'upload-images/blow dry.jpg', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `all_products`
+--
+
+CREATE TABLE `all_products` (
+  `id` int(200) NOT NULL,
+  `c_id` int(200) NOT NULL,
+  `s_id` int(200) NOT NULL,
+  `product` varchar(200) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `price` int(200) NOT NULL,
+  `discount_percentage` int(200) NOT NULL,
+  `offer_price` int(200) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `all_products`
+--
+
+INSERT INTO `all_products` (`id`, `c_id`, `s_id`, `product`, `description`, `price`, `discount_percentage`, `offer_price`, `created_at`) VALUES
+(1, 1, 1, 'soap', 'very good quality', 0, 0, 0, '2025-09-16 10:13:11'),
+(5, 1, 1, 'Soap', 'good', 200, 0, 180, '2025-09-16 10:13:11'),
+(6, 1, 1, 'soap', 'very good', 500, 20, 400, '2025-09-16 10:13:11'),
+(7, 1, 1, 'dress', 'very nice', 600, 10, 540, '2025-09-16 10:13:11'),
+(8, 1, 1, 'top', 'good', 500, 10, 450, '2025-09-16 10:14:06'),
+(9, 1, 1, 'Samsung mobile ', 'very good mobile', 10000, 10, 9000, '2025-09-16 11:15:07');
 
 -- --------------------------------------------------------
 
@@ -198,7 +228,8 @@ CREATE TABLE `enquiry_message` (
 --
 
 INSERT INTO `enquiry_message` (`id`, `name`, `email`, `mobile`, `message`, `status`, `created_at`) VALUES
-(22, 'pooja', 'pooja@gmail.com', 8899117706, 'hello', 'Pending', '2025-07-01 06:30:58');
+(22, 'pooja', 'pooja@gmail.com', 8899117706, 'hello', 'Rejected', '2025-07-01 06:30:58'),
+(24, 'Priyanka ', 'priyanka@gmail.com', 8707858489, 'opening time', 'Pending', '2025-09-15 04:13:08');
 
 -- --------------------------------------------------------
 
@@ -224,7 +255,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `customer_id`, `totalPrice`, `discount`, `totalAfterDiscount`, `billing_number`, `created_at`, `payment_status`, `delivery_status`, `payment_type`) VALUES
-(1, 1, 500.00, 10.00, 450, '2345', '2025-09-09 11:26:42', 0, 'delivered', 'cash on delivery');
+(1, 1, 500.00, 10.00, 450, '2345', '2025-09-09 11:26:42', 0, 'delivered', 'cash on delivery'),
+(2, 1, 1000.00, 10.00, 900, '4534', '2025-09-13 06:15:14', 1, 'yes', 'cash on delivery');
 
 -- --------------------------------------------------------
 
@@ -712,6 +744,12 @@ ALTER TABLE `admin_login_details`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `all_products`
+--
+ALTER TABLE `all_products`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `all_services`
 --
 ALTER TABLE `all_services`
@@ -873,6 +911,12 @@ ALTER TABLE `admin_login_details`
   MODIFY `id` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
+-- AUTO_INCREMENT for table `all_products`
+--
+ALTER TABLE `all_products`
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `all_services`
 --
 ALTER TABLE `all_services`
@@ -906,13 +950,13 @@ ALTER TABLE `category_service`
 -- AUTO_INCREMENT for table `enquiry_message`
 --
 ALTER TABLE `enquiry_message`
-  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `package1`
@@ -1008,7 +1052,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users_notes`
 --
 ALTER TABLE `users_notes`
-  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `users_wishlist`
