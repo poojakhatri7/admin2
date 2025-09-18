@@ -14,14 +14,12 @@
           <div id="products" data-list='{"valueNames":["customer","email","total-orders","total-spent","city","last-seen","last-order"],"page":10,"pagination":true}'>
             <div class="mb-4">
               <div class="row g-3">
-            
-                
-               
+   
             </div>
             
           <div id="tableExample2" data-list='{"valueNames":["name","email","age"],"page":10,"pagination":{"innerWindow":2,"left":1,"right":1}}'>
            <div class="table-responsive mx-n4  mx-lg-n6  bg-body-emphasis border-top border-bottom border-translucent position-relative mt-3">
-               <table class="table table-hover table-striped table-bordered table-sm align-middle text-center shadow-lg rounded-3 overflow-hidden fs-9 mb-0">
+               <table class="table table-hover table-striped table-bordered table-large align-middle text-center shadow-lg rounded-3 overflow-hidden fs-9 mb-0">
                   <thead class="table-primary text-dark">
                     
                     <tr>
@@ -32,7 +30,7 @@
                                     <th class="sort border-top" data-sort="age">Orders</th>
                                         <th class="sort border-top" data-sort="age">Total Spent</th>
                                          <th class="sort border-top" data-sort="age">City</th>
-                                           <th class="sort border-top" data-sort="age">Last Enquiry Message</th>     
+                                           <th class="sort border-top" data-sort="age">Last Order</th>     
                                             <th class="sort border-top" data-sort="age">Actions</th>              
                       
                     </tr>
@@ -53,23 +51,18 @@
  <td> $count</td>
           <td>
             <a class='d-flex align-items-center' href='customer_details?id=".$row['id']."'>
-              <p class='mb-0 ms-5  fw-bold'>".$row['name']."</p>
+              <p class='mb-0 ms-5 text-uppercase fw-bold'>".$row['name']."</p>
             </a>
           </td>
           
-      <td>".$row['email']."</td>
+
+<td>".$row['email']."</td>
 <td>".$row['mobile']."</td>
 <td>".$row['orders']."</td>
 <td>".$row['Total_spend']."</td>
-   
-        
-         
-                 <td class='customer align-middle white-space-nowrap pe-5'>
-              <p class='mb-0 ms-5  fw-bold'>".$row['city']."</p>
-          </td>
-           <td class='customer align-middle white-space-nowrap pe-5'>
-              <p class='mb-0 ms-5  fw-bold'>".$row['last_order']."</p>
-          </td>
+<td>".$row['city']."</td>
+<td>".$row['last_order']."</td>
+     
   <td class='customer align-middle white-space-nowrap pe-5'>
             <a class='d-flex align-items-center' href='customer_details?id=".$row['id']."'>
              <p class='mb-0 ms-3 text-primary fw-bold fs-9'>VIEW DETAILS</p>

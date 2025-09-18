@@ -11,8 +11,12 @@ $product_title = mysqli_real_escape_string($conn, $_POST['product_title']);
 $product_price = mysqli_real_escape_string($conn, $_POST['product_price']);
 $discount = mysqli_real_escape_string($conn, $_POST['discount']);
 $offer_price = mysqli_real_escape_string($conn, $_POST['offer_price']);
-$product_description = mysqli_real_escape_string($conn, $_POST['product_description']);   
-$sql = "INSERT INTO all_products ( product, description ,c_id, s_id , price, discount_percentage ,offer_price) VALUES ('$product_title','$product_description','$c_id','$s_id','$product_price','$discount','$offer_price')";
+$product_description = mysqli_real_escape_string($conn, $_POST['product_description']); 
+$photo = $_FILES["image"]["name"];
+$photo2 = $_FILES["image"]["tmp_name"];
+$uploadPath = "upload-images/" . $photo;
+move_uploaded_file($photo2, $uploadPath);
+$sql = "INSERT INTO all_products ( product, description ,c_id, s_id , price, discount_percentage ,offer_price, file) VALUES ('$product_title','$product_description','$c_id','$s_id','$product_price','$discount','$offer_price','$uploadPath')";
 
 // echo "<div style='text-align:center;'>
 //          <h2>$product_title</h2>
@@ -21,9 +25,9 @@ $sql = "INSERT INTO all_products ( product, description ,c_id, s_id , price, dis
 //            <p>$c_id</p>
 //            <p>$s_id</p>
 //       </div>";
-// echo "<pre>";
-//     print_r($_POST);
-    echo "</pre>";
+// echo '<pre style="text-align :center">';
+//     print_r($_FILES);
+//     echo "</pre>";
       if (mysqli_query($conn, $sql)) {
           echo "<script>alert('Product added successfully!'); window.location.href='add_products';</script>";
       } else {
@@ -55,11 +59,14 @@ $sql = "INSERT INTO all_products ( product, description ,c_id, s_id , price, dis
               </div>
               <h4 class="mb-3">Display images</h4>
               <div class="dropzone dropzone-multiple p-0 mb-5" id="my-awesome-dropzone" data-dropzone="data-dropzone">
-                <div class="fallback"><input name="file" type="file" multiple="multiple" /></div>
+                <div class="fallback">
+                  <input type="file" style="color: rgba(95, 97, 230)"; id="profile-img" name="image"  multiple="multiple" /></div>
+                   <img id="preview-img" src="" alt="Image Preview" style="max-width: 200px; margin: 10px auto 0; margin-top: 8px; display: none;" />
                 <div class="dz-preview d-flex flex-wrap">
-                  <div class="border border-translucent bg-body-emphasis rounded-3 d-flex flex-center position-relative me-2 mb-2" style="height:80px;width:80px;"><img class="dz-image" src="../../../assets/img/products/23.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" /><a class="dz-remove text-body-quaternary" href="#!" data-dz-remove="data-dz-remove"><span data-feather="x"></span></a></div>
+                  <div class="border border-translucent bg-body-emphasis rounded-3 d-flex flex-center position-relative me-2 mb-2" style="height:80px;width:80px;">
+                    <img class="dz-image" src="assets/img/products/23.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" /><a class="dz-remove text-body-quaternary" href="#!" data-dz-remove="data-dz-remove"><span data-feather="x"></span></a></div>
                 </div>
-                <div class="dz-message text-body-tertiary text-opacity-85" data-dz-message="data-dz-message">Drag your photo here<span class="text-body-secondary px-1">or</span><button class="btn btn-link p-0" type="button">Browse from device</button><br /><img class="mt-3 me-2" src="../../../assets/img/icons/image-icon.png" width="40" alt="" /></div>
+               
               </div>
               <h4 class="mb-3">Inventory</h4>
               <div class="row g-0 border-top border-bottom">
@@ -394,6 +401,23 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   </script>
+  <script>
+  document.getElementById('profile-img').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        const previewImg = document.getElementById('preview-img');
+        previewImg.src = e.target.result;
+        previewImg.style.display = 'block';
+      };
+
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
   <script>
 const priceInput = document.getElementById('product_price');
 const discountInput = document.getElementById('discount');

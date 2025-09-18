@@ -4,14 +4,14 @@
 <?php include 'top_navbar.php'; ?>
 <div class="content">
      
-  <h2 class="mb-7">Enquiry Messages</h2>
+  <h2 class="mb-4">Enquiry Messages</h2>
   <div id="tableExample2" data-list='{"valueNames":["name","email","age"],"page":5,"pagination":{"innerWindow":2,"left":1,"right":1}}'>
-  <div class="table-responsive mx-n4  mx-lg-n6  bg-body-emphasis border-top border-bottom border-translucent position-relative mt-3">
-  <table class="table table-hover table-striped table-bordered table-sm align-middle text-center shadow-lg rounded-3 overflow-hidden fs-9 mb-0">
+  <div class="table-responsive mx-n4  mx-lg-n6  bg-body-emphasis border-top border-bottom border-translucent position-relative mt-3" >
+  <table class="table table-hover table-striped table-bordered table-large align-middle text-center shadow-lg rounded-3 overflow-hidden fs-9 mb-0">
   <thead class="table-primary text-dark">
                           
                               <tr>
-                                <th class="sort border-top border-translucent ps-3" data-sort="name">Sno</th>
+                                <th class="sort border-top border-translucent ps-3" data-sort="name">S no</th>
                                 <th class="sort border-top" data-sort="email">Name</th>
                                 <th class="sort border-top" data-sort="age">Email</th>
                                    <th class="sort border-top" data-sort="age">Mobile</th>
@@ -33,7 +33,7 @@ if (mysqli_num_rows($result) > 0) {
         ?>
         <tr>
             <th scope='row'><?php echo $count; ?></th>
-            <td><?php echo $row['name']; ?></td>
+            <td ><?php echo $row['name']; ?></td>
             <td><?php echo $row['email']; ?></td>
             <td><?php echo $row['mobile']; ?></td>
             <td><?php echo $row['message']; ?></td>
