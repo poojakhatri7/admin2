@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Sep 16, 2025 at 02:08 PM
+-- Generation Time: Sep 18, 2025 at 01:25 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -65,20 +65,23 @@ CREATE TABLE `all_products` (
   `price` int(200) NOT NULL,
   `discount_percentage` int(200) NOT NULL,
   `offer_price` int(200) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `file` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `all_products`
 --
 
-INSERT INTO `all_products` (`id`, `c_id`, `s_id`, `product`, `description`, `price`, `discount_percentage`, `offer_price`, `created_at`) VALUES
-(1, 1, 1, 'soap', 'very good quality', 0, 0, 0, '2025-09-16 10:13:11'),
-(5, 1, 1, 'Soap', 'good', 200, 0, 180, '2025-09-16 10:13:11'),
-(6, 1, 1, 'soap', 'very good', 500, 20, 400, '2025-09-16 10:13:11'),
-(7, 1, 1, 'dress', 'very nice', 600, 10, 540, '2025-09-16 10:13:11'),
-(8, 1, 1, 'top', 'good', 500, 10, 450, '2025-09-16 10:14:06'),
-(9, 1, 1, 'Samsung mobile ', 'very good mobile', 10000, 10, 9000, '2025-09-16 11:15:07');
+INSERT INTO `all_products` (`id`, `c_id`, `s_id`, `product`, `description`, `price`, `discount_percentage`, `offer_price`, `created_at`, `file`) VALUES
+(1, 1, 1, 'soap', 'very good quality', 0, 0, 0, '2025-09-16 10:13:11', ''),
+(5, 1, 1, 'Soap', 'good', 200, 0, 180, '2025-09-16 10:13:11', ''),
+(6, 1, 1, 'soap', 'very good', 500, 20, 400, '2025-09-16 10:13:11', ''),
+(7, 1, 1, 'dress', 'very nice', 600, 10, 540, '2025-09-16 10:13:11', ''),
+(8, 1, 1, 'top', 'good', 500, 10, 450, '2025-09-16 10:14:06', ''),
+(9, 1, 1, 'Samsung mobile ', 'very good mobile', 10000, 10, 9000, '2025-09-16 11:15:07', ''),
+(10, 1, 1, 'rtertret', 'fghfgh', 500, 10, 450, '2025-09-18 09:34:57', ''),
+(11, 1, 1, 'rtertret', 'gfdgdsg', 500, 10, 450, '2025-09-18 10:12:49', 'upload-images/refresh.webp');
 
 -- --------------------------------------------------------
 
@@ -228,8 +231,8 @@ CREATE TABLE `enquiry_message` (
 --
 
 INSERT INTO `enquiry_message` (`id`, `name`, `email`, `mobile`, `message`, `status`, `created_at`) VALUES
-(22, 'pooja', 'pooja@gmail.com', 8899117706, 'hello', 'Rejected', '2025-07-01 06:30:58'),
-(24, 'Priyanka ', 'priyanka@gmail.com', 8707858489, 'opening time', 'Pending', '2025-09-15 04:13:08');
+(22, 'pooja', 'pooja@gmail.com', 8899117706, 'hello', 'Pending', '2025-07-01 06:30:58'),
+(24, 'Priyanka ', 'priyanka@gmail.com', 8707858489, 'opening time', 'Completed', '2025-09-15 04:13:08');
 
 -- --------------------------------------------------------
 
@@ -914,7 +917,7 @@ ALTER TABLE `admin_login_details`
 -- AUTO_INCREMENT for table `all_products`
 --
 ALTER TABLE `all_products`
-  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `all_services`
